@@ -1,7 +1,6 @@
 import {
   ActivityIndicator,
   FlatList,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -17,6 +16,8 @@ const ListData = ({
   setPage,
   isLoading,
   responses,
+  handleHapus,
+  handleEdit,
 }) => {
   // render Item
   const renderItem = ({item, index}) => (
@@ -25,10 +26,14 @@ const ListData = ({
         <Text className="text-black">{item.nama}</Text>
       </View>
       <View className="flex-row items-center space-x-[2px]">
-        <TouchableOpacity className="p-1 rounded-md bg-yellow-200">
+        <TouchableOpacity
+          onPress={() => handleEdit(item)}
+          className="p-1 rounded-md bg-yellow-200">
           <Text className="text-black">Ubah</Text>
         </TouchableOpacity>
-        <TouchableOpacity className="p-1 rounded-md bg-red-500">
+        <TouchableOpacity
+          onPress={() => handleHapus(item.id)}
+          className="p-1 rounded-md bg-red-500">
           <Text className="text-white">Hapus</Text>
         </TouchableOpacity>
       </View>
@@ -51,7 +56,7 @@ const ListData = ({
   const renderLoader = () =>
     !endData ? (
       <View>
-        <ActivityIndicator size="large" color="#aaa" />
+        <ActivityIndicator size="small" color="#aaa" />
       </View>
     ) : (
       <View>
@@ -66,23 +71,18 @@ const ListData = ({
 
   return (
     <View>
-      {console.log('end data', endData)}
       <FlatList
         data={dataList}
         renderItem={renderItem}
         ListEmptyComponent={myListEmpty}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{paddingBottom: '10%', paddingHorizontal: 5}}
-        ListHeaderComponent={() => (
-          <Text className="text-black text-center text-lg font-bold">
-            Daftar Distrik
-          </Text>
-        )}
+        keyExtractor={(item, index) => index}
+        contentContainerStyle={{paddingBottom: '45%', paddingHorizontal: 5}}
         onRefresh={() => setRefreshing(true)}
         refreshing={refreshing}
         ListFooterComponent={renderLoader}
         onEndReachedThreshold={0.2}
         onEndReached={handleScroll}
+        extraData={dataList}
       />
     </View>
   );

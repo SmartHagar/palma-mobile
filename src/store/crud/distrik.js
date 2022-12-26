@@ -25,10 +25,14 @@ const useDistrik = create(
           },
         });
         set(state => ({...state, responses: response.data}));
-        set(state => ({...state, dtDistrik: response.data.data}));
-        // set(state => ({
-        //   dtDistrik: [...state.dtDistrik, ...response.data.data],
-        // }));
+        if (page === 1) {
+          set(state => ({...state, dtDistrik: response.data.data}));
+        } else {
+          set(state => ({
+            dtDistrik: [...state.dtDistrik, ...response.data.data],
+          }));
+        }
+
         return {
           status: 'berhasil',
           data: response.data,

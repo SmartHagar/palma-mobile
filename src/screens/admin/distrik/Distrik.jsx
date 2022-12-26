@@ -1,75 +1,136 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import Form from './Form';
 import useDistrik from '../../../store/crud/distrik';
 import ListData from './ListData';
 import showToast from '../../../services/show-toast';
 import Toast from 'react-native-toast-message';
+import DialogDelete from '../../../componets/form/DialogDelete';
 
 const Distrik = () => {
   // store
-  const {setDistrik, dtDistrik, responses} = useDistrik();
+  const {setDistrik, dtDistrik, responses, removeData} = useDistrik();
   // state
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
   const [openForm, setOpenForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const [visible, setVisible] = useState(false);
   const [dataToast, setDataToast] = useState(false);
-  const [dataLoad, setDataLoad] = useState(dtDistrik);
+  const [dtEdit, setDtEdit] = useState('');
+  const [id, setId] = useState('');
   // ambil data
   const fetch = async () => {
-    setIsLoading(true);
-    const res = await setDistrik({search, page, limit});
-    console.log(res);
-    setDataLoad([...dataLoad, ...res.data.data]);
+    if (page === 1) {
+      setIsLoading(true);
+    }
+    await setDistrik({search, page});
     setIsLoading(false);
   };
   // use effect
   useEffect(() => {
     fetch();
-
     return () => {};
-  }, [search, page, limit]);
+  }, [page]);
 
-  refreshing && (fetch(), setRefreshing(false));
+  // use effect
+
+  refreshing && (setPage(1), fetch(), setRefreshing(false));
 
   // open modal form
-  const handelOpenForm = () => {
+  const handelTambahData = () => {
+    setDtEdit('');
     setOpenForm(true);
   };
 
   dataToast && (showToast(dataToast), setDataToast(false));
 
+  const handleSearch = async () => {
+    await setDistrik({search});
+  };
+
+  // ketika tombol hapus ditekan
+  const handleHapus = id => {
+    setVisible(true);
+    setId(id);
+  };
+
+  // menghapus data
+  const deleteData = async () => {
+    const res = await removeData(id);
+    showToast(res.data);
+  };
+  // menghapus data
+  const handleEdit = row => {
+    setDtEdit(row);
+    setOpenForm(true);
+  };
+
+  const showData = () => {
+    return isLoading ? (
+      <View>
+        <Text className="text-center text-black mt-[50%]">
+          Sedang mengambil data...
+        </Text>
+      </View>
+    ) : (
+      <ListData
+        dataList={dtDistrik}
+        setRefreshing={setRefreshing}
+        refreshing={refreshing}
+        page={page}
+        setPage={setPage}
+        isLoading={isLoading}
+        responses={responses}
+        handleHapus={handleHapus}
+        handleEdit={handleEdit}
+      />
+    );
+  };
   return (
     <View>
-      {/* show toast */}
+      <View style={{zIndex: 1}}>
+        <Toast />
+      </View>
       {openForm && (
         <Form
           setOpenForm={setOpenForm}
           openForm={openForm}
           setDataToast={setDataToast}
+          dtEdit={dtEdit}
         />
       )}
+      {/* dialog delete */}
+      <DialogDelete
+        visible={visible}
+        setVisible={setVisible}
+        deleteData={deleteData}
+      />
       <View className="justify-between flex-row mx-2">
         <Text className="text-black">Silahkan mengolah data Distrik</Text>
-        <TouchableOpacity onPress={handelOpenForm}>
+        <TouchableOpacity onPress={handelTambahData}>
           <Text className="text-black">Tambah Data</Text>
         </TouchableOpacity>
       </View>
-      <View className="h-full">
-        <ListData
-          dataList={dataLoad}
-          setRefreshing={setRefreshing}
-          refreshing={refreshing}
-          page={page}
-          setPage={setPage}
-          isLoading={isLoading}
-          responses={responses}
+
+      <View className="mb-2">
+        <Text className="text-black text-center text-lg font-bold">
+          Daftar Distrik
+        </Text>
+        <TextInput
+          className="border rounded-xl py-0 text-black"
+          onSubmitEditing={handleSearch}
+          onChangeText={setSearch}
         />
       </View>
-      <Toast />
+      <View className="h-full">{showData()}</View>
     </View>
   );
 };

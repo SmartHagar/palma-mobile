@@ -5,19 +5,45 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import InputComp from '../../../componets/form/InputComp';
 import useDistrik from '../../../store/crud/distrik';
 import {Controller, useForm} from 'react-hook-form';
 import DialogComp from '../../../componets/form/DialogComp';
+import showToast from '../../../services/show-toast';
+import Toast from 'react-native-toast-message';
 
-const Form = ({openForm, setOpenForm, setDataToast}) => {
+const Form = ({openForm, setOpenForm, dtEdit, setDataToast}) => {
   // store
-  const {addData} = useDistrik();
+  const {addData, updateData} = useDistrik();
   // state
   const handleClose = () => {
     setOpenForm(false);
   };
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: {errors, isValid},
+  } = useForm();
+
+  useEffect(() => {
+    dtEdit &&
+      reset(
+        {
+          nama: dtEdit.nama,
+        },
+        {
+          keepErrors: true,
+          keepDirty: true,
+        },
+      );
+
+    !dtEdit && resetInput();
+
+    return () => {};
+  }, [dtEdit]);
 
   // Validasi
   const resetInput = () => {
@@ -31,23 +57,32 @@ const Form = ({openForm, setOpenForm, setDataToast}) => {
       },
     );
   };
-  const {
-    control,
-    handleSubmit,
-    reset,
-    formState: {errors, isValid},
-  } = useForm();
 
   // ketika data akan disimpan
   const onSubmit = async data => {
-    const add = await addData(data);
-    setDataToast(add.data);
-    if (add.data.type === 'success') {
-      resetInput();
+    let add;
+    // simpan data
+    if (!dtEdit) {
+      add = await addData(data);
+      if (add.data.type === 'success') {
+        resetInput();
+      }
     }
+    // ubah data
+    if (dtEdit) {
+      add = await updateData(dtEdit.id, data);
+      if (add.data.type === 'success') {
+        setOpenForm(false);
+      }
+    }
+    setDataToast(add.data);
   };
   return (
     <DialogComp openForm={openForm} judul="Form Distrik">
+      {/* <View
+        style={{zIndex: 1, position: 'absolute', top: -10, left: 0, right: 0}}>
+        <Toast />
+      </View> */}
       <ScrollView>
         <View>
           <Controller
@@ -63,8 +98,7 @@ const Form = ({openForm, setOpenForm, setDataToast}) => {
                 onChangeText={value => onChange(value)}
                 value={value}
                 onBlur={onBlur}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
+                onSubmitEditing={handleSubmit(onSubmit)}
               />
             )}
             name="nama"
