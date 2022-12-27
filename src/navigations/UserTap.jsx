@@ -8,100 +8,118 @@ import Register from '../screens/users/register/Register';
 import {Icon} from '@rneui/themed';
 import colors from '../assets/styles/colors';
 
-const UserTap = createBottomTabNavigator();
+const TapUser = createBottomTabNavigator();
 
-const TapUser = () => {
+const UserTap = () => {
   return (
-    <UserTap.Navigator
+    <TapUser.Navigator
       initialRouteName="User"
       screenOptions={{
-        tabBarActiveTintColor: colors.kuning,
+        tabBarActiveTintColor: colors.active,
         tabBarInactiveTintColor: colors.putih,
-        tabBarStyle: {backgroundColor: colors.hitam},
+        tabBarStyle: {backgroundColor: colors.primary},
         tabBarHideOnKeyboard: true,
       }}>
-      <UserTap.Screen
+      <TapUser.Screen
         name="Dashboard"
         component={DashboardUser}
         options={{
           headerShown: false,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.primary},
-          tabBarLabel: 'Home',
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>Dashboard</Text>
+            ) : (
+              <Text style={styles.nonActive}>Dashboard</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="home"
               type="antdesign"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
       />
-      <UserTap.Screen
+      <TapUser.Screen
         name="Peta"
         component={Peta}
         options={{
           headerShown: false,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.hitam},
-          tabBarLabel: 'Peta',
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>Peta</Text>
+            ) : (
+              <Text style={styles.nonActive}>Peta</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="map"
               type="materialcommunityicons"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
       />
-      <UserTap.Screen
+      <TapUser.Screen
         name="About"
         component={About}
         options={{
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.hitam},
-          tabBarLabel: 'About',
+          headerShown: false,
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>About</Text>
+            ) : (
+              <Text style={styles.nonActive}>About</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="infocirlceo"
               type="antdesign"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
       />
-      <UserTap.Screen
+      <TapUser.Screen
         name="Register"
         component={Register}
         options={{
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.hitam},
-          tabBarLabel: 'Register',
+          headerShown: false,
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>Register</Text>
+            ) : (
+              <Text style={styles.nonActive}>Register</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="user"
               type="antdesign"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
       />
-    </UserTap.Navigator>
+    </TapUser.Navigator>
   );
 };
 
-export default TapUser;
+export default UserTap;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  active: {
+    color: colors.active,
+    fontWeight: 'bold',
+  },
+  nonActive: {
+    color: colors.putih,
+  },
+});

@@ -9,11 +9,18 @@ import {
   OrangKetemuStack,
   PelaporStack,
 } from './AdminStack';
+import colors from '../assets/styles/colors';
 
 const Drawer = createDrawerNavigator();
 const AdminDraw = () => {
   return (
-    <Drawer.Navigator initialRouteName="Admin">
+    <Drawer.Navigator
+      initialRouteName="Admin"
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: colors.primary,
+        },
+      }}>
       <Drawer.Screen
         name="DashboardDraw"
         options={{

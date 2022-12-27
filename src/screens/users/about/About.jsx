@@ -1,12 +1,11 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import BackroundComp from '../../../assets/styles/BackroundComp';
 
 const About = () => {
   return (
-    <BackroundComp>
+    <SafeAreaView>
       <ScrollView></ScrollView>
-    </BackroundComp>
+    </SafeAreaView>
   );
 };
 

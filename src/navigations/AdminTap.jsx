@@ -12,8 +12,8 @@ const AdminTap = () => {
     <TapAdmin.Navigator
       initialRouteName="Admin"
       screenOptions={{
-        tabBarActiveTintColor: colors.warning,
-        tabBarInactiveTintColor: colors.primary,
+        tabBarActiveTintColor: colors.active,
+        tabBarInactiveTintColor: colors.putih,
         tabBarStyle: {backgroundColor: colors.secondary},
         tabBarHideOnKeyboard: true,
       }}>
@@ -22,17 +22,19 @@ const AdminTap = () => {
         component={DashboardStack}
         options={{
           headerShown: false,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.primary},
-          tabBarLabel: 'Dashboard',
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>Dashboard</Text>
+            ) : (
+              <Text style={styles.nonActive}>Dashboard</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="home"
               type="antdesign"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
@@ -42,17 +44,19 @@ const AdminTap = () => {
         component={SebaranStack}
         options={{
           headerShown: false,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.hitam},
-          tabBarLabel: 'Sebaran',
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>Sebaran</Text>
+            ) : (
+              <Text style={styles.nonActive}>Sebaran</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="map"
               type="materialcommunityicons"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
@@ -62,17 +66,19 @@ const AdminTap = () => {
         component={Akun}
         options={{
           headerShown: false,
-          headerTitleAlign: 'center',
-          headerTitleStyle: {fontSize: 16},
-          headerTintColor: '#fff',
-          headerStyle: {backgroundColor: colors.hitam},
-          tabBarLabel: 'Akun',
+          tabBarLabel: ({tintColor, focused, item}) => {
+            return focused ? (
+              <Text style={styles.active}>Akun</Text>
+            ) : (
+              <Text style={styles.nonActive}>Akun</Text>
+            );
+          },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
               name="map"
               type="materialcommunityicons"
               size={24}
-              color={focused ? colors.kuning : colors.putih}
+              color={focused ? colors.active : colors.putih}
             />
           ),
         }}
@@ -83,4 +89,12 @@ const AdminTap = () => {
 
 export default AdminTap;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  active: {
+    color: colors.active,
+    fontWeight: 'bold',
+  },
+  nonActive: {
+    color: colors.putih,
+  },
+});

@@ -1,7 +1,5 @@
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import BackroundComp from '../../../assets/styles/BackroundComp';
-import {Text, Card} from '@rneui/themed';
 const Peta = () => {
   return (
     <ScrollView>

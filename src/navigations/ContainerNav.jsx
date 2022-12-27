@@ -3,19 +3,21 @@ import {DefaultTheme} from '@react-navigation/native-stack';
 import React from 'react';
 import colors from '../assets/styles/colors';
 import AdminDraw from './AdminDraw';
+import UserTap from './UserTap';
 // user
 const MyTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme,
-    background: colors.primary,
+    background: 'rgba(255, 255, 255, 0.70)',
   },
 };
 
 const ContainerNav = () => {
   return (
-    <NavigationContainer>
-      <AdminDraw />
+    <NavigationContainer theme={MyTheme}>
+      {/* <AdminDraw /> */}
+      <UserTap />
     </NavigationContainer>
   );
 };
