@@ -17,7 +17,10 @@ const UserTap = () => {
       screenOptions={{
         tabBarActiveTintColor: colors.active,
         tabBarInactiveTintColor: colors.putih,
-        tabBarStyle: {backgroundColor: colors.primary},
+        tabBarStyle: {
+          backgroundColor: colors.primary,
+          borderColor: colors.third,
+        },
         tabBarHideOnKeyboard: true,
       }}>
       <TapUser.Screen
@@ -117,9 +120,10 @@ export default UserTap;
 const styles = StyleSheet.create({
   active: {
     color: colors.active,
-    fontWeight: 'bold',
+    fontFamily: 'Roboto-Bold',
   },
   nonActive: {
     color: colors.putih,
+    fontFamily: 'Roboto-Regular',
   },
 });
