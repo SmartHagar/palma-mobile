@@ -4,9 +4,9 @@ import React from 'react';
 import DashboardUser from '../screens/users/dashboard/DashboardUser';
 import Peta from '../screens/users/peta/Peta';
 import About from '../screens/users/about/About';
-import Register from '../screens/users/register/Register';
 import {Icon} from '@rneui/themed';
 import colors from '../assets/styles/colors';
+import Login from '../screens/users/login/Login';
 
 const TapUser = createBottomTabNavigator();
 
@@ -90,15 +90,15 @@ const UserTap = () => {
         }}
       />
       <TapUser.Screen
-        name="Register"
-        component={Register}
+        name="Login"
+        component={Login}
         options={{
           headerShown: false,
           tabBarLabel: ({tintColor, focused, item}) => {
             return focused ? (
-              <Text style={styles.active}>Register</Text>
+              <Text style={styles.active}>Login</Text>
             ) : (
-              <Text style={styles.nonActive}>Register</Text>
+              <Text style={styles.nonActive}>Login</Text>
             );
           },
           tabBarIcon: ({focused, color, size}) => (

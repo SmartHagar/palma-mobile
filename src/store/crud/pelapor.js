@@ -45,12 +45,34 @@ const usePelapor = create(
       }
     },
     addData: async items => {
+      const formData = new FormData();
+      formData.append('foto_ktp', {
+        uri: items.foto_ktp.uri,
+        name: items.foto_ktp.fileName,
+        type: items.foto_ktp.type,
+      });
+      formData.append('foto_kk', {
+        uri: items.foto_kk.uri,
+        name: items.foto_kk.fileName,
+        type: items.foto_kk.type,
+      });
+      formData.append('distrik_id', items.distrik_id);
+      formData.append('nama', items.nama);
+      formData.append('no_ktp', items.no_ktp);
+      formData.append('no_kk', items.no_kk);
+      formData.append('no_hp', items.no_hp);
+      formData.append('alamat', items.alamat);
+      formData.append('email', items.email);
+      formData.append('password', items.password);
       try {
         const res = await crud({
           method: 'post',
           url: `/pelapor`,
           // headers: { Authorization: `Bearer ${getToken}` },
-          data: items,
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          data: formData,
         });
         set(state => ({
           dtPelapor: [res.data.data, ...state.dtPelapor],

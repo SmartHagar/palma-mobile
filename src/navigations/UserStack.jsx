@@ -4,6 +4,7 @@ import colors from '../assets/styles/colors';
 import OrangHilang from '../screens/users/daftar/OrangHilang';
 import UserTap from './UserTap';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import Register from '../screens/users/register/Register';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,16 @@ const UserStack = () => {
           headerTitleStyle: styles.headerTitleStyle,
         }}
         component={OrangHilang}
+      />
+      <Stack.Screen
+        name="RegisterStack"
+        options={{
+          title: 'Masukan data pelapor',
+          headerStyle: styles.headerStyle,
+          headerTintColor: colors.putih,
+          headerTitleStyle: styles.headerTitleStyle,
+        }}
+        component={Register}
       />
     </Stack.Navigator>
   );

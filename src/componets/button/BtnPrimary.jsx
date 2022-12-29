@@ -2,11 +2,11 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import colors from '../../assets/styles/colors';
 
-const BtnPrimary = ({text, type = 'primary'}) => {
+const BtnPrimary = ({text, type = 'primary', ...props}) => {
   return (
-    <TouchableOpacity className="flex-row">
+    <TouchableOpacity {...props}>
       <Text
-        className="text-white p-2 rounded-md"
+        className="text-white p-2 rounded-md text-center"
         style={{backgroundColor: colors[type]}}>
         {text}
       </Text>
