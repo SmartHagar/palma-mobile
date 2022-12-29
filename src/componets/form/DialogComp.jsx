@@ -8,13 +8,13 @@ import {
 import React from 'react';
 import {Dialog} from '@rneui/themed';
 
-const DialogComp = ({children, judul, openForm}) => {
+const DialogComp = ({children, judul, openForm, height = '60%'}) => {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <Dialog
         isVisible={openForm}
-        overlayStyle={styles.containerDialog}
+        overlayStyle={{maxHeight: height}}
         onBackdropPress={Keyboard.dismiss}>
         <Text className="text-center text-black text-lg mb-2 font-bold border-b pb-2 -mt-4">
           {judul}
@@ -26,9 +26,3 @@ const DialogComp = ({children, judul, openForm}) => {
 };
 
 export default DialogComp;
-
-const styles = StyleSheet.create({
-  containerDialog: {
-    maxHeight: '60%',
-  },
-});

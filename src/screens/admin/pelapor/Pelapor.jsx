@@ -13,6 +13,8 @@ import showToast from '../../../services/show-toast';
 import Toast from 'react-native-toast-message';
 import DialogDelete from '../../../componets/form/DialogDelete';
 import Detail from './Detail';
+import InputComp from '../../../componets/form/InputComp';
+import BtnPrimary from '../../../componets/button/BtnPrimary';
 
 const Pelapor = () => {
   // store
@@ -114,25 +116,27 @@ const Pelapor = () => {
         setVisible={setVisible}
         deleteData={deleteData}
       />
-      <View className="justify-between flex-row mx-2">
+      <View className="justify-between flex-row mx-2 items-center my-2">
         <Text className="text-black">Silahkan mengolah data Pelapor</Text>
-        <TouchableOpacity onPress={handelTambahData}>
-          <Text className="text-black">Tambah Data</Text>
-        </TouchableOpacity>
+        <BtnPrimary
+          text="Tambah data"
+          type="secondary"
+          onPress={handelTambahData}
+        />
       </View>
 
-      <View className="mb-2">
-        <Text className="text-black text-center text-lg font-bold">
+      <View className="mb-2 mx-2">
+        <Text className="text-black text-center text-lg font-[Roboto-Bold]">
           Daftar Pelapor
         </Text>
-        <Text className="text-black">
+        <Text className="text-black font-[Roboto-Regular]">
           Untuk melihat detail informasi pelapor, silahkan tekan pada nama
           pelapor yang ingin dilihat
         </Text>
-        <TextInput
-          className="border rounded-xl py-0 text-black"
+        <InputComp
           onSubmitEditing={handleSearch}
           onChangeText={setSearch}
+          placeholder="Cari nama pelapor"
         />
       </View>
       <View className="h-full">{showData()}</View>

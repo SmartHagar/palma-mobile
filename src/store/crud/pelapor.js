@@ -140,6 +140,25 @@ const usePelapor = create(
         };
       }
     },
+    ubahStatus: async (id, row) => {
+      try {
+        const response = await crud({
+          method: 'post',
+          url: `/pelapor/ubah-status/${id}`,
+          // headers: { Authorization: `Bearer ${getToken}` },
+          data: row,
+        });
+        return {
+          status: 'berhasil',
+          data: response.data,
+        };
+      } catch (error) {
+        return {
+          status: 'error',
+          data: error.response.data,
+        };
+      }
+    },
   })),
 );
 

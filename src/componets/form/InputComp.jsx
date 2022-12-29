@@ -5,9 +5,11 @@ import colors from '../../assets/styles/colors';
 const InputComp = ({label, iconName, errorText, password, name, ...props}) => {
   return (
     <View>
-      <Text className="text-black mb-1 mt-2 font-[Roboto-Regular]">
-        {label}
-      </Text>
+      {label && (
+        <Text className="text-black mb-1 mt-2 font-[Roboto-Regular]">
+          {label}
+        </Text>
+      )}
       <View className="">
         <TextInput
           className={`border text-black py-[1px] px-2 rounded-md font-[Roboto-Regular]`}

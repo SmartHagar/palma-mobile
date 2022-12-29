@@ -12,6 +12,8 @@ import ListData from './ListData';
 import showToast from '../../../services/show-toast';
 import Toast from 'react-native-toast-message';
 import DialogDelete from '../../../componets/form/DialogDelete';
+import BtnPrimary from '../../../componets/button/BtnPrimary';
+import InputComp from '../../../componets/form/InputComp';
 
 const Distrik = () => {
   // store
@@ -113,22 +115,22 @@ const Distrik = () => {
         setVisible={setVisible}
         deleteData={deleteData}
       />
-      <View className="justify-between flex-row mx-2">
+      <View className="justify-between flex-row mx-2 items-center my-2">
         <Text className="text-black">Silahkan mengolah data Distrik</Text>
-        <TouchableOpacity onPress={handelTambahData}>
-          <Text className="text-black">Tambah Data</Text>
-        </TouchableOpacity>
+        <BtnPrimary
+          text="Tambah data"
+          type="secondary"
+          onPress={handelTambahData}
+        />
       </View>
 
       <View className="mb-2">
         <Text className="text-black text-center text-lg font-bold">
           Daftar Distrik
         </Text>
-        <TextInput
-          className="border rounded-xl py-0 text-black"
-          onSubmitEditing={handleSearch}
-          onChangeText={setSearch}
-        />
+        <View>
+          <InputComp onSubmitEditing={handleSearch} onChangeText={setSearch} />
+        </View>
       </View>
       <View className="h-full">{showData()}</View>
     </View>

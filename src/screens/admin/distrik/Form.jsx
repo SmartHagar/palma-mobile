@@ -12,6 +12,7 @@ import {Controller, useForm} from 'react-hook-form';
 import DialogComp from '../../../componets/form/DialogComp';
 import showToast from '../../../services/show-toast';
 import Toast from 'react-native-toast-message';
+import BtnPrimary from '../../../componets/button/BtnPrimary';
 
 const Form = ({openForm, setOpenForm, dtEdit, setDataToast}) => {
   // store
@@ -79,10 +80,6 @@ const Form = ({openForm, setOpenForm, dtEdit, setDataToast}) => {
   };
   return (
     <DialogComp openForm={openForm} judul="Form Distrik">
-      {/* <View
-        style={{zIndex: 1, position: 'absolute', top: -10, left: 0, right: 0}}>
-        <Toast />
-      </View> */}
       <ScrollView>
         <View>
           <Controller
@@ -106,12 +103,12 @@ const Form = ({openForm, setOpenForm, dtEdit, setDataToast}) => {
         </View>
       </ScrollView>
       <View className="flex-row space-x-2 mt-4">
-        <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-          <Text className="text-black">Simpan</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleClose}>
-          <Text className="text-black">Tutup</Text>
-        </TouchableOpacity>
+        <View>
+          <BtnPrimary onPress={handleSubmit(onSubmit)} text="Simpan" />
+        </View>
+        <View>
+          <BtnPrimary onPress={handleClose} type="secondary" text="Tutup" />
+        </View>
       </View>
     </DialogComp>
   );

@@ -7,6 +7,7 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
+import colors from '../../../assets/styles/colors';
 
 const ListData = ({
   dataList,
@@ -21,7 +22,7 @@ const ListData = ({
 }) => {
   // render Item
   const renderItem = ({item, index}) => (
-    <View className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-slate-300">
+    <View className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white/70">
       <View>
         <Text className="text-black">{item.nama}</Text>
       </View>
@@ -43,7 +44,7 @@ const ListData = ({
   const myListEmpty = () => {
     return (
       <View style={{alignItems: 'center'}}>
-        <Text>Data tidak ditemukan</Text>
+        <Text style={{color: colors.third}}>Data tidak ditemukan</Text>
       </View>
     );
   };
@@ -56,7 +57,7 @@ const ListData = ({
   const renderLoader = () =>
     !endData ? (
       <View>
-        <ActivityIndicator size="small" color="#aaa" />
+        <ActivityIndicator size="large" color={colors.third} />
       </View>
     ) : (
       <View>

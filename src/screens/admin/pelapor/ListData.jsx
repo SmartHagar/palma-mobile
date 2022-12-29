@@ -33,22 +33,19 @@ const ListData = ({
     <View
       style={{
         backgroundColor:
-          item.status === 'tolak'
+          item.status === 'ditolak'
             ? colors.danger
-            : item.status === 'proses'
-            ? colors.warning
-            : colors.primary,
+            : item.status === 'diproses'
+            ? colors.secondary
+            : item.status === 'diterima'
+            ? 'rgba(254, 254, 254, 0.649)'
+            : '',
       }}
-      className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg">
+      className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white">
       <TouchableOpacity onPress={() => showDetail(item)}>
         <Text className="text-black">{item.nama}</Text>
       </TouchableOpacity>
       <View className="flex-row items-center space-x-[2px]">
-        <TouchableOpacity
-          onPress={() => handleEdit(item)}
-          className="p-1 rounded-md bg-yellow-200">
-          <Text className="text-black">Ubah</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => handleHapus(item.id)}
           className="p-1 rounded-md bg-red-500">
@@ -74,7 +71,7 @@ const ListData = ({
   const renderLoader = () =>
     !endData ? (
       <View>
-        <ActivityIndicator size="small" color="#aaa" />
+        <ActivityIndicator size="large" color={colors.third} />
       </View>
     ) : (
       <View>
@@ -89,7 +86,14 @@ const ListData = ({
 
   return (
     <View>
-      <Detail visible={visible} setVisible={setVisible} dtDet={dtDet} />
+      {visible && (
+        <Detail
+          visible={visible}
+          setVisible={setVisible}
+          dtDet={dtDet}
+          setRefreshing={setRefreshing}
+        />
+      )}
       <FlatList
         data={dataList}
         renderItem={renderItem}

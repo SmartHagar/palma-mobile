@@ -14,7 +14,10 @@ const AdminTap = () => {
       screenOptions={{
         tabBarActiveTintColor: colors.active,
         tabBarInactiveTintColor: colors.putih,
-        tabBarStyle: {backgroundColor: colors.secondary},
+        tabBarStyle: {
+          backgroundColor: colors.primary,
+          borderColor: colors.third,
+        },
         tabBarHideOnKeyboard: true,
       }}>
       <TapAdmin.Screen

@@ -18,7 +18,12 @@ const AdminDraw = () => {
       initialRouteName="Admin"
       screenOptions={{
         drawerStyle: {
-          backgroundColor: colors.primary,
+          backgroundColor: 'rgb(255, 255, 255)',
+        },
+        drawerActiveBackgroundColor: colors.primary,
+        drawerActiveTintColor: colors.putih,
+        drawerLabelStyle: {
+          fontFamily: 'Roboto-Regular',
         },
       }}>
       <Drawer.Screen

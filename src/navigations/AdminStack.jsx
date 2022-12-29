@@ -21,7 +21,7 @@ const DashboardStack = ({navigation}) => {
         options={{
           title: 'Dashboard',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -44,7 +44,7 @@ const SebaranStack = ({navigation}) => {
         options={{
           title: 'Sebaran',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -66,7 +66,7 @@ const DistrikStack = ({navigation}) => {
         options={{
           title: 'Distrik',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -88,7 +88,7 @@ const PelaporStack = ({navigation}) => {
         options={{
           title: 'Pelapor',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -110,7 +110,7 @@ const OrangHilangStack = ({navigation}) => {
         options={{
           title: 'Orang Hilang',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -132,7 +132,7 @@ const LaporanStack = ({navigation}) => {
         options={{
           title: 'Laporan',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -154,7 +154,7 @@ const OrangKetemuStack = ({navigation}) => {
         options={{
           title: 'Orang Ketemu',
           headerStyle: styles.headerStyle,
-          headerTintColor: colors.secondary,
+          headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,
           headerLeft: () => (
             <View style={styles.btn}>
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   headerStyle: {
-    backgroundColor: '#f4511e',
+    backgroundColor: colors.primary,
   },
   headerTitleStyle: {
     fontWeight: 'bold',
