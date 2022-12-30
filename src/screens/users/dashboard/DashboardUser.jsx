@@ -8,15 +8,26 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import colors from '../../../assets/styles/colors';
 import logo from '../../../assets/gambar/logo-polres.png';
 
 import aturan from './aturan';
 import {useNavigation} from '@react-navigation/native';
+import useLogin from '../../../store/auth/login';
 
 const DashboardUser = () => {
+  // store
+  const {dtLogin, setFromStorage} = useLogin();
+  // navigation
   const navigation = useNavigation();
+  // use effect
+  useEffect(() => {
+    setFromStorage();
+
+    return () => {};
+  }, []);
+
   return (
     <SafeAreaView style={styles.container}>
       {/* kop / logo */}
@@ -68,13 +79,17 @@ const DashboardUser = () => {
               Daftar Orang Hilang
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            className="rounded-lg"
-            style={{backgroundColor: colors.secondary}}>
-            <Text className="text-white  font-[Roboto-Regular] p-2">
-              Laporkan Orang Hilang
-            </Text>
-          </TouchableOpacity>
+          {dtLogin?.role === 'pelapor' ? (
+            <TouchableOpacity
+              className="rounded-lg"
+              style={{backgroundColor: colors.secondary}}>
+              <Text className="text-white  font-[Roboto-Regular] p-2">
+                Laporkan Orang Hilang
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            ''
+          )}
         </View>
         {/* Grafik */}
         <View>

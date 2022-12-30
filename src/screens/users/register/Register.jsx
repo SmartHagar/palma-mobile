@@ -96,7 +96,7 @@ const Register = () => {
         </Text>
       </View>
       <KeyboardAvoiding>
-        <ScrollView className="w-[98%] mx-auto mb-20">
+        <ScrollView className="w-[98%] mx-auto mb-[25%]">
           <View>
             <Controller
               control={control}
@@ -264,6 +264,7 @@ const Register = () => {
               name="alamat"
             />
           </View>
+          {isLoading ? <SpinerLoad /> : ''}
           {berhasil ? (
             <View className="mt-4">
               <Text
@@ -278,7 +279,6 @@ const Register = () => {
               <BtnPrimary text="Simpan" onPress={handleSubmit(onSubmit)} />
             </View>
           )}
-          {isLoading ? <SpinerLoad /> : ''}
         </ScrollView>
       </KeyboardAvoiding>
       <Toast />

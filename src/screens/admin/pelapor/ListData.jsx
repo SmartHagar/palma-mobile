@@ -36,7 +36,7 @@ const ListData = ({
           item.status === 'ditolak'
             ? colors.danger
             : item.status === 'diproses'
-            ? colors.secondary
+            ? colors.primary
             : item.status === 'diterima'
             ? 'rgba(254, 254, 254, 0.649)'
             : '',

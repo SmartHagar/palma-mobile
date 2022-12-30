@@ -1,7 +1,7 @@
-import {View, Text} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import BtnPrimary from '../../../componets/button/BtnPrimary';
 import useLogin from '../../../store/auth/login';
+import BtnPrimary from '../../../componets/button/BtnPrimary';
 
 const Akun = () => {
   // store
@@ -18,3 +18,5 @@ const Akun = () => {
 };
 
 export default Akun;
+
+const styles = StyleSheet.create({});
