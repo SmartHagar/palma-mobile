@@ -81,6 +81,7 @@ const DashboardUser = () => {
           </TouchableOpacity>
           {dtLogin?.role === 'pelapor' ? (
             <TouchableOpacity
+              onPress={() => navigation.navigate('OrangHilangStack')}
               className="rounded-lg"
               style={{backgroundColor: colors.secondary}}>
               <Text className="text-white  font-[Roboto-Regular] p-2">

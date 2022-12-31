@@ -3,14 +3,28 @@ import React, {useState} from 'react';
 import colors from '../../assets/styles/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const InputComp = ({label, iconName, errorText, password, name, ...props}) => {
+const InputComp = ({
+  label,
+  iconName,
+  errorText,
+  password,
+  name,
+  optional,
+  ...props
+}) => {
   const [hidePassword, setHidePassword] = useState(password);
   return (
     <View>
       {label && (
-        <Text className="text-black mb-1 mt-2 font-[Roboto-Regular]">
-          {label}
-        </Text>
+        <View className="flex-row mb-1 mt-2">
+          <Text className="text-black font-[Roboto-Regular]">{label}</Text>
+          {optional && (
+            <>
+              <Text className="text-black font-[Roboto-Regular] mx-2">-</Text>
+              <Text className="text-black font-[Roboto-Regular]">Optional</Text>
+            </>
+          )}
+        </View>
       )}
       <View>
         <TextInput

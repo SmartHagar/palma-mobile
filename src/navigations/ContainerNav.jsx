@@ -45,7 +45,6 @@ const ContainerNav = () => {
   }
   return (
     <NavigationContainer theme={MyTheme}>
-      {console.log(dtLogin)}
       {/* jika login admin */}
       {dtLogin?.role === 'admin' ? (
         <AdminDraw />

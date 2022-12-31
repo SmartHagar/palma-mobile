@@ -12,7 +12,6 @@ const useLogin = create(
   devtools((set, get) => ({
     dtLogin: [],
     setFromStorage: async () => {
-      console.log('set');
       try {
         let user_login = JSON.parse(await AsyncStorage.getItem('user_login'));
         if (user_login !== null) {

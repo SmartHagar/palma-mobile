@@ -1,9 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import colors from '../assets/styles/colors';
-import OrangHilang from '../screens/users/daftar/OrangHilang';
+import DaftarOrangHilang from '../screens/users/daftar/OrangHilang';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PelaporTap from './PelaporTap';
+import OrangHilang from '../screens/pelapor/orang-hilang/OrangHilang';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,16 @@ const PelaporStack = () => {
         name="DaftarOrangHilangStack"
         options={{
           title: 'Daftar Orang Hilang',
+          headerStyle: styles.headerStyle,
+          headerTintColor: colors.putih,
+          headerTitleStyle: styles.headerTitleStyle,
+        }}
+        component={DaftarOrangHilang}
+      />
+      <Stack.Screen
+        name="OrangHilangStack"
+        options={{
+          title: 'Masukan data orang hilang',
           headerStyle: styles.headerStyle,
           headerTintColor: colors.putih,
           headerTitleStyle: styles.headerTitleStyle,

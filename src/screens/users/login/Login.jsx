@@ -40,10 +40,12 @@ const Login = () => {
   };
   // ketika data akan disimpan
   const onSubmit = async dataForm => {
+    setIsLoading(true);
     // login data
     const add = await setLogin(dataForm);
     const {data} = add;
     showToast(data);
+    setIsLoading(false);
   };
 
   return (
