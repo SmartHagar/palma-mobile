@@ -2,13 +2,11 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useCallback, useEffect, useState} from 'react';
 import colors from '../../../assets/styles/colors';
 import InputComp from '../../../componets/form/InputComp';
-import KeyboardAvoiding from '../../../componets/form/KeyboardAvoiding';
 import BtnPrimary from '../../../componets/button/BtnPrimary';
 import {Controller, useForm} from 'react-hook-form';
 import InputFile from '../../../componets/form/InputFile';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import showToast from '../../../services/show-toast';
-import DistrikSelect from '../../../componets/select/DistrikSelect';
 import Toast from 'react-native-toast-message';
 import SpinerLoad from '../../../componets/loading/SpinerLoad';
 import useOrangHilang from '../../../store/crud/orang-hilang';
@@ -16,11 +14,14 @@ import useLogin from '../../../store/auth/login';
 import DialogComp from '../../../componets/form/DialogComp';
 import {useNavigation} from '@react-navigation/native';
 
-const FormOrangHilang = ({openForm, setOpenForm, dtOrangHilang}) => {
+const FormOrangHilang = ({
+  openForm,
+  setOpenForm,
+  dtOrangHilang,
+  setRefreshing,
+}) => {
   // state
   const [imgOrg, setImgOrng] = useState(null);
-  const [distrikId, setDistrikId] = useState('');
-  const [isReset, setIsReset] = useState(false);
   const [berhasil, setBerhasil] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   // store
@@ -55,7 +56,6 @@ const FormOrangHilang = ({openForm, setOpenForm, dtOrangHilang}) => {
       },
     );
     setImgOrng('');
-    setIsReset(true);
   };
 
   const options = {
@@ -427,6 +427,13 @@ const FormOrangHilang = ({openForm, setOpenForm, dtOrangHilang}) => {
               Data anda telah tersimpan. Silahkan menunggu verifikasi data oleh
               admin. Hasil verifikasi akan dikirim pada email anda.
             </Text>
+            <View className="w-[80%] mx-auto mt-2">
+              <BtnPrimary
+                onPress={() => (setOpenForm(false), setRefreshing(true))}
+                type="secondary"
+                text="Tutup"
+              />
+            </View>
           </View>
         ) : (
           <>

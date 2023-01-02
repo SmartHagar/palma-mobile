@@ -1,6 +1,6 @@
-function capitalize(word) {
+function myCapitalize(word) {
   const lower = word.toLowerCase();
   return word.charAt(0).toUpperCase() + lower.slice(1);
 }
 
-export default capitalize;
+export default myCapitalize;

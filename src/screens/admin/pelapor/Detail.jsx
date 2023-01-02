@@ -12,7 +12,7 @@ import BtnPrimary from '../../../componets/button/BtnPrimary';
 import StatusSelect from '../../../componets/select/StatusSelect';
 import colors from '../../../assets/styles/colors';
 import useUrl from '../../../services/base_url';
-import capitalize from '../../../services/capitalize';
+import myCapitalize from '../../../services/myCapitalize';
 import usePelapor from '../../../store/crud/pelapor';
 import SpinerLoad from '../../../componets/loading/SpinerLoad';
 
@@ -153,7 +153,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
         <StatusSelect
           isReset={isReset}
           setPilihStatus={setPilihStatus}
-          defaultButtonText={dtDet ? capitalize(dtDet.status) : 'Daftar Item'}
+          defaultButtonText={dtDet ? myCapitalize(dtDet.status) : 'Daftar Item'}
         />
       </View>
       <View className="space-y-2 mt-4">

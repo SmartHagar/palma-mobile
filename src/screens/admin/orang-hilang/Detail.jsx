@@ -1,25 +1,18 @@
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import DialogComp from '../../../componets/form/DialogComp';
 import BtnPrimary from '../../../componets/button/BtnPrimary';
 import StatusSelect from '../../../componets/select/StatusSelect';
 import colors from '../../../assets/styles/colors';
 import useUrl from '../../../services/base_url';
-import capitalize from '../../../services/myCapitalize';
-import usePelapor from '../../../store/crud/pelapor';
-import SpinerLoad from '../../../componets/loading/SpinerLoad';
 import myCapitalize from '../../../services/myCapitalize';
+import SpinerLoad from '../../../componets/loading/SpinerLoad';
+import moment from 'moment';
+import useOrangHilang from '../../../store/crud/orang-hilang';
 
 const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
   // store
-  const {ubahStatus} = usePelapor();
+  const {ubahStatus} = useOrangHilang();
   // state
   const [isReset, setIsReset] = useState(false);
   const [pilihStatus, setPilihStatus] = useState('');
@@ -36,8 +29,12 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
   }, [dtDet]);
 
   const onSubmit = async () => {
+    const items = {
+      status: pilihStatus,
+      tgl_laporan: moment(new Date()).format('YYYY-MM-DD'),
+    };
     setIsLoading(true);
-    const ubah = await ubahStatus(dtDet.id, {status: pilihStatus});
+    const ubah = await ubahStatus(dtDet.id, items);
     setIsLoading(false);
     setVisible(false);
     setRefreshing(true);
@@ -185,19 +182,51 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             {dtDet.alamat}
           </Text>
         </View>
-        {/* status */}
         <View
           className="border p-1 rounded-md"
           style={{borderColor: colors.third}}>
-          <Text className="text-black font-[Roboto-Regular] text-center underline">
-            Status Laporan
-          </Text>
-          <Text className="text-black font-[Roboto-Regular]">
-            {myCapitalize(dtDet.status)}
-          </Text>
+          <View>
+            <Text className="text-black font-[Roboto-Regular] text-center underline">
+              Pelapor
+            </Text>
+          </View>
+          <View className="flex-row space-x-2">
+            <Text className="text-black font-[Roboto-Regular] w-14">Nama</Text>
+            <Text className="text-black font-[Roboto-Regular]">
+              : {dtDet.pelapor.nama}
+            </Text>
+          </View>
+          <View className="flex-row space-x-2">
+            <Text className="text-black font-[Roboto-Regular] w-14">No Hp</Text>
+            <Text className="text-black font-[Roboto-Regular]">
+              : {dtDet.pelapor.no_hp}
+            </Text>
+          </View>
+          <View className="flex-row space-x-2">
+            <Text className="text-black font-[Roboto-Regular] w-14">Email</Text>
+            <Text className="text-black font-[Roboto-Regular]">
+              : {dtDet.pelapor.user.email}
+            </Text>
+          </View>
         </View>
       </ScrollView>
+      <View>
+        <StatusSelect
+          isReset={isReset}
+          setPilihStatus={setPilihStatus}
+          defaultButtonText={
+            dtDet ? myCapitalize(dtDet.status) : 'Pilih Status'
+          }
+        />
+      </View>
       <View className="space-y-2 mt-4">
+        {isLoading ? (
+          <SpinerLoad />
+        ) : (
+          <View>
+            <BtnPrimary onPress={onSubmit} text="Ubah Status" />
+          </View>
+        )}
         <View className="w-[80%] mx-auto">
           <BtnPrimary
             onPress={() => setVisible(false)}

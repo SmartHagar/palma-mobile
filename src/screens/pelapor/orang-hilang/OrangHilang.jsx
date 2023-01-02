@@ -15,6 +15,7 @@ const OrangHilang = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [visible, setVisible] = useState(false);
   const [dataToast, setDataToast] = useState(false);
+  const [addData, setAddData] = useState(false);
 
   // ambil data pelapor
   const {setFromStorage, dtLogin} = useLogin();
@@ -27,10 +28,14 @@ const OrangHilang = () => {
   // cek pelapor pernah melaporkan orang hilang
   const {showOrangHilang, dtOrangHilang, responses} = useOrangHilang();
   const cekPelapor = async () => {
-    const {data} = await showOrangHilang({id: dtLogin?.pelapor.id});
+    console.log('ambil data');
+    const {data} = await showOrangHilang({id: dtLogin?.pelapor.id, page});
     const cek = data.data;
     if (cek.length > 0) {
       setOpenForm(false);
+      cekDataSembunyi(cek);
+    } else {
+      setOpenForm(true);
     }
   };
   // jika belum pernah maka tampilkan form
@@ -38,8 +43,8 @@ const OrangHilang = () => {
     cekPelapor();
     return () => {};
   }, []);
-
-  // jika pernah maka yang ditampilkan adalah list laporannya
+  // refresh list
+  refreshing && (setPage(1), cekPelapor(), setRefreshing(false));
   const showData = () => {
     return isLoading ? (
       <View>
@@ -61,6 +66,12 @@ const OrangHilang = () => {
   };
   // cek data yang diproses
   // jika ada sembunyikan tambah data jika tidak tampilkan tambah data
+  const cekDataSembunyi = passData => {
+    if (passData) {
+      const filter = passData.some(row => row.status === 'diproses');
+      !filter && setAddData(true);
+    }
+  };
   // beri warna merah jika laporan ditolak, warna primary jika laporan diproses, warna putih jika laporan diterima
   // cek apakah laporan telah terdapat informasi lokasi
   // jika lokasi belum ada tambah tombol tambah lokasi jika sudah ada ubah lokasi
@@ -75,15 +86,26 @@ const OrangHilang = () => {
           dtOrangHilang={dtOrangHilang}
         />
       )}
-      <View className="flex-row justify-between my-2 mx-2">
+      <View className="flex-row justify-between items-center my-2 mx-2">
         <Text className="text-black font-[Roboto-Regular]">
           Daftar orang hilang yang anda laporkan
         </Text>
-        <BtnPrimary
-          text="Tambah data"
-          onPress={() => setOpenForm(true)}
-          type="secondary"
-        />
+        {addData && (
+          <BtnPrimary
+            text="Tambah data"
+            onPress={() => setOpenForm(true)}
+            type="secondary"
+          />
+        )}
+      </View>
+      <View>
+        <Text className="text-black font-[Roboto-Regular] mx-2 my-2 text-justify">
+          Warna hijau menandakan laporan diproses, warna putih laporan diterima,
+          Warna merah laporan ditolak.
+        </Text>
+        <Text className="text-black font-[Roboto-Regular] mx-2">
+          Untuk melihat detail orang hilang. Tekan pada nama orang.
+        </Text>
       </View>
       <View>{showData()}</View>
     </View>
