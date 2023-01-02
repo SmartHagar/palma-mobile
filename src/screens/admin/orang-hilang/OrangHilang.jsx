@@ -48,12 +48,6 @@ const OrangHilang = () => {
 
   refreshing && (setPage(1), fetch(), setRefreshing(false));
 
-  // open modal form
-  const handelTambahData = () => {
-    setDtEdit('');
-    setOpenForm(true);
-  };
-
   dataToast && (showToast(dataToast), setDataToast(false));
 
   const handleSearch = async () => {
@@ -119,17 +113,14 @@ const OrangHilang = () => {
       />
 
       <View className="mb-2 mx-2">
-        <Text className="text-black text-center text-lg font-[Roboto-Bold]">
-          Daftar Orang Hilang
-        </Text>
-        <Text className="text-black font-[Roboto-Regular]">
-          Untuk melihat detail informasi pelapor, silahkan tekan pada nama
-          pelapor yang ingin dilihat
+        <Text className="text-black font-[Roboto-Regular] my-1">
+          Untuk melihat detail informasi orang hilang, silahkan tekan pada nama
+          orang hilang yang ingin dilihat
         </Text>
         <InputComp
           onSubmitEditing={handleSearch}
           onChangeText={setSearch}
-          placeholder="Cari nama pelapor"
+          placeholder="Cari nama orang hilang"
         />
       </View>
       <View className="h-full">{showData()}</View>

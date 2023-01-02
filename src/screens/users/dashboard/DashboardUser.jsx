@@ -29,7 +29,7 @@ const DashboardUser = () => {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} className="bg-white/50">
       {/* kop / logo */}
       <View className="flex-row justify-start items-center space-x-4 mt-2 ml-1">
         <View>
@@ -110,7 +110,6 @@ export default DashboardUser;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffffa6',
   },
   kop: {
     fontFamily: 'Montserrat-ExtraBold',

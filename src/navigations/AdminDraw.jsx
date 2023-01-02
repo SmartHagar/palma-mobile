@@ -58,14 +58,14 @@ const AdminDraw = () => {
         }}
         component={OrangHilangStack}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         name="LaporanDraw"
         options={{
           headerShown: false,
           title: 'Laporan',
         }}
         component={LaporanStack}
-      />
+      /> */}
       <Drawer.Screen
         name="OrangKetemuDraw"
         options={{

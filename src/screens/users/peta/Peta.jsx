@@ -1,6 +1,8 @@
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import MapboxGL, {MapView, Camera} from '@rnmapbox/maps';
+import colors from '../../../assets/styles/colors';
+import useOrangHilang from '../../../store/crud/orang-hilang';
 
 MapboxGL.setWellKnownTileServer('Mapbox');
 MapboxGL.setAccessToken(
@@ -8,7 +10,37 @@ MapboxGL.setAccessToken(
 );
 
 const Peta = () => {
+  // store
+  const {setOrangHilang, dtOrangHilang} = useOrangHilang();
   const coordinates = [140.7038764782628, -2.542737536781644];
+
+  // effect
+  useEffect(() => {
+    setOrangHilang({});
+    return () => {};
+  }, []);
+
+  const showPoint = () => {
+    return dtOrangHilang.map((row, index) => {
+      const {lokasi} = row;
+      if (lokasi !== null) {
+        const coorMiss = [lokasi.longitude, lokasi.latitude];
+        return (
+          <View key={index}>
+            <MapboxGL.PointAnnotation
+              coordinate={coorMiss}
+              id={(index + 1).toString()}>
+              <View
+                style={{backgroundColor: colors.danger}}
+                className="rounded-full">
+                <Text className="text-white p-1">{row.nama}</Text>
+              </View>
+            </MapboxGL.PointAnnotation>
+          </View>
+        );
+      }
+    });
+  };
   return (
     <View className="h-full">
       <MapboxGL.MapView
@@ -16,38 +48,9 @@ const Peta = () => {
         localizeLabels={true}
         style={{flex: 1}}>
         {/* koordinate */}
-        <MapboxGL.Camera zoomLevel={13} centerCoordinate={coordinates} />
+        <MapboxGL.Camera zoomLevel={15} centerCoordinate={coordinates} />
         {/* Mark */}
-        <View>
-          <MapboxGL.MarkerView id="1" coordinate={coordinates}>
-            <View
-              style={{
-                height: 30,
-                width: 30,
-                backgroundColor: '#cc001f',
-                borderRadius: 50,
-                borderColor: '#fff',
-                borderWidth: 3,
-              }}
-            />
-          </MapboxGL.MarkerView>
-        </View>
-        {/* Point */}
-        <MapboxGL.PointAnnotation
-          coordinate={coordinates}
-          draggable={true}
-          onDragEnd={e => console.log('titik', e.geometry.coordinates)}>
-          <View
-            style={{
-              height: 30,
-              width: 30,
-              backgroundColor: '#00cccc',
-              borderRadius: 50,
-              borderColor: '#fff',
-              borderWidth: 3,
-            }}
-          />
-        </MapboxGL.PointAnnotation>
+        {showPoint()}
       </MapboxGL.MapView>
     </View>
   );

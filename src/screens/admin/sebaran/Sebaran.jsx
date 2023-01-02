@@ -1,10 +1,57 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import React, {useEffect} from 'react';
+import MapboxGL, {MapView, Camera} from '@rnmapbox/maps';
+import colors from '../../../assets/styles/colors';
+import useOrangHilang from '../../../store/crud/orang-hilang';
+
+MapboxGL.setWellKnownTileServer('Mapbox');
+MapboxGL.setAccessToken(
+  'pk.eyJ1Ijoic21hcnRzcGFydGFjdXMiLCJhIjoiY2xjOTJ5bXl6MXBnYjNwbW9waTlsdzRoeCJ9.3pOceeR4L5500KVwXWoLZQ',
+);
 
 const Sebaran = () => {
+  // store
+  const {setOrangHilang, dtOrangHilang} = useOrangHilang();
+  const coordinates = [140.7038764782628, -2.542737536781644];
+
+  // effect
+  useEffect(() => {
+    setOrangHilang({});
+    return () => {};
+  }, []);
+
+  const showPoint = () => {
+    return dtOrangHilang.map((row, index) => {
+      const {lokasi} = row;
+      if (lokasi !== null) {
+        const coorMiss = [lokasi.longitude, lokasi.latitude];
+        return (
+          <View key={index}>
+            <MapboxGL.PointAnnotation
+              coordinate={coorMiss}
+              id={(index + 1).toString()}>
+              <View
+                style={{backgroundColor: colors.danger}}
+                className="rounded-full">
+                <Text className="text-white p-1">{row.nama}</Text>
+              </View>
+            </MapboxGL.PointAnnotation>
+          </View>
+        );
+      }
+    });
+  };
   return (
-    <View>
-      <Text>Sebaran</Text>
+    <View className="h-full">
+      <MapboxGL.MapView
+        logoEnabled={false}
+        localizeLabels={true}
+        style={{flex: 1}}>
+        {/* koordinate */}
+        <MapboxGL.Camera zoomLevel={15} centerCoordinate={coordinates} />
+        {/* Mark */}
+        {showPoint()}
+      </MapboxGL.MapView>
     </View>
   );
 };

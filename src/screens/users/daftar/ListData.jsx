@@ -37,39 +37,25 @@ const ListData = ({
   };
   // render Item
   const renderItem = ({item, index}) => (
-    <View
-      style={{
-        backgroundColor:
-          item.status === 'ditolak'
-            ? colors.danger
-            : item.status === 'diproses'
-            ? colors.primary
-            : item.status === 'diterima'
-            ? 'rgba(254, 254, 254, 0.649)'
-            : '',
-
-        borderWidth: 1,
-        borderColor: colors.third,
-      }}
-      className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white">
-      <TouchableOpacity onPress={() => showDetail(item)}>
-        <Text className="text-black">{item.nama}</Text>
-      </TouchableOpacity>
-
-      <View className="flex-row items-center space-x-[2px]">
-        <TouchableOpacity
-          onPress={() => showLokasi(item)}
-          style={{backgroundColor: colors.primary}}
-          className="p-1 rounded-md">
-          <Text className="text-white">Lokasi</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => handleHapus(item.id)}
-          className="p-1 rounded-md bg-red-500">
-          <Text className="text-white">Hapus</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+    <>
+      {item.status === 'diterima' && (
+        <View
+          style={{borderWidth: 1, borderColor: colors.third}}
+          className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white/70">
+          <TouchableOpacity onPress={() => showDetail(item)}>
+            <Text className="text-black">{item.nama}</Text>
+          </TouchableOpacity>
+          <View className="flex-row items-center space-x-[2px]">
+            <TouchableOpacity
+              onPress={() => showLokasi(item)}
+              style={{backgroundColor: colors.primary}}
+              className="p-1 rounded-md">
+              <Text className="text-white">Lokasi</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
+    </>
   );
   //   jika data kosong
   const myListEmpty = () => {
@@ -136,10 +122,3 @@ const ListData = ({
 };
 
 export default ListData;
-
-const styles = StyleSheet.create({
-  container: {
-    padding: 50,
-    flex: 1,
-  },
-});

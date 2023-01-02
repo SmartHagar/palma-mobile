@@ -3,7 +3,6 @@ import {
   FlatList,
   PermissionsAndroid,
   Platform,
-  StyleSheet,
   Text,
   ToastAndroid,
   TouchableOpacity,
@@ -24,8 +23,6 @@ const ListData = ({
   page,
   setPage,
   responses,
-  handleHapus,
-  handleEdit,
 }) => {
   const {BASE_URL} = useUrl();
   // state
@@ -73,7 +70,6 @@ const ListData = ({
         // To handle permission related exception
         console.warn(err);
       }
-      setIsLoading(false);
     }
   };
 
@@ -107,6 +103,12 @@ const ListData = ({
         // Showing alert after successful downloading
         console.log('res -> ', JSON.stringify(res));
         ToastAndroid.show('Download Berhasil!', ToastAndroid.SHORT);
+        setIsLoading(false);
+      })
+      .catch(function (error) {
+        // handle error
+        ToastAndroid.show(`Error ${error}`, ToastAndroid.SHORT);
+        setIsLoading(false);
       });
   };
   // render Item
@@ -121,6 +123,8 @@ const ListData = ({
             : item.status === 'diterima'
             ? 'rgba(254, 254, 254, 0.895)'
             : '',
+        borderWidth: 1,
+        borderColor: colors.third,
       }}
       className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white">
       <TouchableOpacity onPress={() => showDetail(item)}>

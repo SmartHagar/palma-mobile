@@ -15,7 +15,7 @@ const About = () => {
     Linking.openURL(`tel:${phoneNumber}`);
   };
   return (
-    <View className="justify-center h-full mx-4">
+    <View className="justify-center h-full mx-4 ">
       <View className="mb-4">
         <Text className="text-black text-center font-[Montserrat-ExtraBold] text-lg">
           Kepolisian Resor (Polres)
