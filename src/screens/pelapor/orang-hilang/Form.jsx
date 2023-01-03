@@ -140,7 +140,7 @@ const FormOrangHilang = ({
           <Controller
             control={control}
             rules={{
-              required: false,
+              required: true,
             }}
             render={({field: {onChange, onBlur, value}}) => (
               <InputComp
@@ -152,7 +152,6 @@ const FormOrangHilang = ({
                 onBlur={onBlur}
                 onSubmitEditing={handleSubmit(onSubmit)}
                 keyboardType="numeric"
-                optional={true}
               />
             )}
             name="umur"
@@ -425,11 +424,12 @@ const FormOrangHilang = ({
               style={{color: colors.third}}
               className="font-[Roboto-Bold] text-center text-[14px]">
               Data anda telah tersimpan. Silahkan menunggu verifikasi data oleh
-              admin. Hasil verifikasi akan dikirim pada email anda.
+              admin.
+              {/* Hasil verifikasi akan dikirim pada email anda. */}
             </Text>
             <View className="w-[80%] mx-auto mt-2">
               <BtnPrimary
-                onPress={() => (setOpenForm(false), setRefreshing(true))}
+                onPress={() => setOpenForm(false)}
                 type="secondary"
                 text="Tutup"
               />

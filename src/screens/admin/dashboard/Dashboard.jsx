@@ -1,12 +1,20 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {Text} from '@rneui/base';
+import GrafikOrangHilang from '../../../componets/grafik/tahunan/GrafikOrangHilang';
 
 const Dashboard = () => {
   return (
     <View>
-      <View className="items-center justify-center h-full">
-        <Text>Open up App.js to start working on your app!</Text>
+      <View className="my-2">
+        <Text className="text-black text-center text-lg font-[Montserrat-Bold]">
+          Selamat Datang Admin
+        </Text>
+      </View>
+      <View className="justify-center w-full">
+        <Text className="text-black text-center text-md font-[Montserrat-Bold] mb-2">
+          Grafik Orang Hilang
+        </Text>
+        <GrafikOrangHilang />
       </View>
     </View>
   );

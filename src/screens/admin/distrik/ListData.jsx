@@ -22,7 +22,12 @@ const ListData = ({
 }) => {
   // render Item
   const renderItem = ({item, index}) => (
-    <View className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white/70">
+    <View
+      style={{
+        borderWidth: 1,
+        borderColor: colors.third,
+      }}
+      className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white/70">
       <View>
         <Text className="text-black">{item.nama}</Text>
       </View>

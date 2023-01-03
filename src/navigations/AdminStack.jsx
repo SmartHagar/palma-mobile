@@ -11,6 +11,7 @@ import OrangKetemu from '../screens/admin/orang-ketemu/OrangKetemu';
 import {Button} from '@rneui/base';
 import DrawToogle from './DrawToogle';
 import colors from '../assets/styles/colors';
+import Akun from '../screens/admin/akun/Akun';
 const Stack = createNativeStackNavigator();
 
 const DashboardStack = ({navigation}) => {
@@ -167,6 +168,28 @@ const OrangKetemuStack = ({navigation}) => {
   );
 };
 
+const AkunStack = ({navigation}) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="AkunStack"
+        component={Akun}
+        options={{
+          title: 'Akun',
+          headerStyle: styles.headerStyle,
+          headerTintColor: colors.putih,
+          headerTitleStyle: styles.headerTitleStyle,
+          headerLeft: () => (
+            <View style={styles.btn}>
+              <DrawToogle navigation={navigation} />
+            </View>
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 export {
   DashboardStack,
   SebaranStack,
@@ -175,6 +198,7 @@ export {
   OrangHilangStack,
   LaporanStack,
   OrangKetemuStack,
+  AkunStack,
 };
 
 const styles = StyleSheet.create({

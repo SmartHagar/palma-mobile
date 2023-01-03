@@ -13,7 +13,7 @@ MapboxGL.setAccessToken(
 const ShowLokasi = ({openLokasi, setOpenLokasi, dtDet}) => {
   // state
   const [zoom, setZoom] = useState(16);
-  const lockMiss = [dtDet.lokasi.longitude, dtDet.lokasi.latitude];
+  const lockMiss = [dtDet.lokasi?.longitude, dtDet.lokasi?.latitude];
   console.log('lokasi', lockMiss);
 
   return (

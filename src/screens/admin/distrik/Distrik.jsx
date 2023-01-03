@@ -25,7 +25,7 @@ const Distrik = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [dataToast, setDataToast] = useState(false);
+  const [dataToast, setDataToast] = useState('');
   const [dtEdit, setDtEdit] = useState('');
   const [id, setId] = useState('');
   // ambil data
@@ -52,7 +52,7 @@ const Distrik = () => {
     setOpenForm(true);
   };
 
-  dataToast && (showToast(dataToast), setDataToast(false));
+  dataToast && (showToast(dataToast), setDataToast(''));
 
   const handleSearch = async () => {
     await setDistrik({search});

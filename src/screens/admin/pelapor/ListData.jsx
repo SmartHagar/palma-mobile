@@ -40,6 +40,8 @@ const ListData = ({
             : item.status === 'diterima'
             ? 'rgba(254, 254, 254, 0.649)'
             : '',
+        borderWidth: 1,
+        borderColor: colors.third,
       }}
       className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white">
       <TouchableOpacity onPress={() => showDetail(item)}>

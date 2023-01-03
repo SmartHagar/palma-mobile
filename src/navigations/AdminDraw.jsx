@@ -3,6 +3,7 @@ import React from 'react';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AdminTap from './AdminTap';
 import {
+  AkunStack,
   DistrikStack,
   LaporanStack,
   OrangHilangStack,
@@ -73,6 +74,14 @@ const AdminDraw = () => {
           title: 'Orang Ketemu',
         }}
         component={OrangKetemuStack}
+      />
+      <Drawer.Screen
+        name="Akun"
+        options={{
+          headerShown: false,
+          title: 'Akun',
+        }}
+        component={AkunStack}
       />
     </Drawer.Navigator>
   );

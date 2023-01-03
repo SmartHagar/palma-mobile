@@ -45,14 +45,16 @@ const ListData = ({
           <TouchableOpacity onPress={() => showDetail(item)}>
             <Text className="text-black">{item.nama}</Text>
           </TouchableOpacity>
-          <View className="flex-row items-center space-x-[2px]">
-            <TouchableOpacity
-              onPress={() => showLokasi(item)}
-              style={{backgroundColor: colors.primary}}
-              className="p-1 rounded-md">
-              <Text className="text-white">Lokasi</Text>
-            </TouchableOpacity>
-          </View>
+          {item.lokasi !== null && (
+            <View className="flex-row items-center space-x-[2px]">
+              <TouchableOpacity
+                onPress={() => showLokasi(item)}
+                style={{backgroundColor: colors.primary}}
+                className="p-1 rounded-md">
+                <Text className="text-white">Lokasi</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       )}
     </>
