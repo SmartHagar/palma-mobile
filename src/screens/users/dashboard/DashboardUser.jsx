@@ -15,6 +15,7 @@ import logo from '../../../assets/gambar/logo-polres.png';
 import aturan from './aturan';
 import {useNavigation} from '@react-navigation/native';
 import useLogin from '../../../store/auth/login';
+import GrafikOrangHilangTahunan from '../../../componets/grafik/tahunan/GrafikOrangHilang';
 
 const DashboardUser = () => {
   // store
@@ -93,11 +94,14 @@ const DashboardUser = () => {
           )}
         </View>
         {/* Grafik */}
-        <View>
-          <View>
-            <Text className="font-[Roboto-Regular] text-black my-5 text-center">
+        <View className="my-5">
+          <View className="mb-1">
+            <Text className="font-[Roboto-Regular] text-black text-center text-lg">
               Grafik Orang Hilang
             </Text>
+          </View>
+          <View>
+            <GrafikOrangHilangTahunan />
           </View>
         </View>
       </ScrollView>

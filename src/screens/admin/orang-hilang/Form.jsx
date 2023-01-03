@@ -80,10 +80,6 @@ const Form = ({openForm, setOpenForm, dtEdit, setDataToast}) => {
   };
   return (
     <DialogComp openForm={openForm} judul="Form Distrik">
-      {/* <View
-        style={{zIndex: 1, position: 'absolute', top: -10, left: 0, right: 0}}>
-        <Toast />
-      </View> */}
       <ScrollView>
         <View>
           <Controller

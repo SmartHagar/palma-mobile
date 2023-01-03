@@ -87,7 +87,7 @@ const Login = () => {
                 }}
                 render={({field: {onChange, onBlur, value}}) => (
                   <InputComp
-                    placeholder=""
+                    placeholder="*******"
                     label="Password"
                     errorText={errors.password && 'Tidak boleh kosong'}
                     onChangeText={value => onChange(value)}
