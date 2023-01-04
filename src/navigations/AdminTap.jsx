@@ -78,8 +78,8 @@ const AdminTap = () => {
           },
           tabBarIcon: ({focused, color, size}) => (
             <Icon
-              name="map"
-              type="materialcommunityicons"
+              name="user"
+              type="antdesign"
               size={24}
               color={focused ? colors.active : colors.putih}
             />
