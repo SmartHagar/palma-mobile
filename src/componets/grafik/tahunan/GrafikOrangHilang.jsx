@@ -1,26 +1,28 @@
 import {Dimensions, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import useLaporan from '../../../store/api/laporan';
 import moment from 'moment';
 import {BarChart} from 'react-native-chart-kit';
 import colors from '../../../assets/styles/colors';
 import SpinerLoad from '../../loading/SpinerLoad';
 import TahunSelect from '../../select/TahunSelect';
+import {useIsFocused} from '@react-navigation/native';
+import useOrangHilangAPI from '../../../store/api/orang-hilang';
 
 const GrafikOrangHilang = () => {
   // store
-  const {setLaporanTahun, dtLaporan} = useLaporan();
+  const {setApiTahunan, dtLaporan} = useOrangHilangAPI();
   // state
   const [tahun, setTahun] = useState(moment().format('YYYY')); //moment().format('YYYY')
   const [myDataChart, setMyDataChart] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [addWidth, setAddWidth] = useState(2);
-  const [pilihTahun, setPilihTahun] = useState();
+
+  const isFocused = useIsFocused();
 
   // group
   function groupBy(items) {
     const groups = items.reduce((groups, row) => {
-      const date = row.tgl_laporan.split('-')[1];
+      const date = row.tgl_hilang.split('-')[1];
       if (!groups[date]) {
         groups[date] = [];
       }
@@ -30,16 +32,16 @@ const GrafikOrangHilang = () => {
     // Edit: to add it in the array format instead
     const groupArrays = Object.keys(groups).map(date => {
       return {
-        tgl_laporan: date,
+        tgl_hilang: date,
         data: groups[date].length,
       };
     });
 
     function compare(a, b) {
-      if (a.tgl_laporan < b.tgl_laporan) {
+      if (a.tgl_hilang < b.tgl_hilang) {
         return -1;
       }
-      if (a.tgl_laporan > b.tgl_laporan) {
+      if (a.tgl_hilang > b.tgl_hilang) {
         return 1;
       }
       return 0;
@@ -48,17 +50,16 @@ const GrafikOrangHilang = () => {
     groupArrays.sort(compare);
     return groupArrays;
   }
-
+  const fetchData = async () => {
+    setIsLoading(true);
+    const {data} = await setApiTahunan({tahun});
+    showGrafik(data);
+  };
   // effect
   useEffect(() => {
-    setIsLoading(true);
-    const fetch = async () => {
-      const {data} = await setLaporanTahun({tahun});
-      showGrafik(data);
-    };
-    fetch();
+    fetchData();
     return () => {};
-  }, [tahun]);
+  }, [tahun, isFocused]);
 
   const showGrafik = dataChart => {
     const dataGroup = groupBy(dataChart);
@@ -66,7 +67,7 @@ const GrafikOrangHilang = () => {
     const categories = [];
     const data = [];
     dataGroup.forEach(el => {
-      categories.push(moment(`${tahun}-${el.tgl_laporan}-01`).format('MMM'));
+      categories.push(moment(`${tahun}-${el.tgl_hilang}-01`).format('MMM'));
       data.push(el.data);
     });
     setMyDataChart({
@@ -106,6 +107,7 @@ const GrafikOrangHilang = () => {
               color: () => colors.third,
               strokeWidth: 2, // optional, default 3
               barPercentage: 0.8,
+              decimalPlaces: 2,
             }}
             verticalLabelRotation={0}
             fromZero={true}

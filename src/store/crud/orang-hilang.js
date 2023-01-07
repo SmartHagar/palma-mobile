@@ -98,6 +98,7 @@ const useOrangHilang = create(
       formData.append('pakaian_terakhir', items.pakaian_terakhir);
       formData.append('hubungan', items.hubungan);
       formData.append('alamat', items.alamat);
+      formData.append('tgl_hilang', items.tgl_hilang);
       try {
         const res = await crud({
           method: 'post',

@@ -132,7 +132,7 @@ const Register = () => {
                   value={value}
                   onBlur={onBlur}
                   onSubmitEditing={handleSubmit(onSubmit)}
-                  secureTextEntry={true}
+                  password={true}
                 />
               )}
               name="password"

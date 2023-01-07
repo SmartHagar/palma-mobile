@@ -1,36 +1,57 @@
 /** @format */
 
-import create from "zustand";
-import { devtools } from "zustand/middleware";
-import useUrl from "../../services/base_url";
+import create from 'zustand';
+import {devtools} from 'zustand/middleware';
+import useUrl from '../../services/base_url';
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
-const { api } = useUrl();
+const {api} = useUrl();
 
 // const getToken = JSON.parse(localStorage.getItem("token"));
 
-const useTransaksiAPI = create(
+const useOrangHilangAPI = create(
   devtools((set, get) => ({
-    dtTransaksi: [],
-    setTransaksi: async () => {
+    dtApiOrgHilang: [],
+    setApiOrangHilang: async () => {
       try {
         const res = await api({
-          method: "get",
-          url: `/transaksi`,
+          method: 'get',
+          url: `/orang-hilang`,
         });
-        set((state) => ({ ...state, dtTransaksi: res.data }));
+        set(state => ({...state, dtApiOrgHilang: res.data}));
         return {
-          status: "berhasil",
+          status: 'berhasil',
           data: res.data,
         };
       } catch (error) {
         return {
-          status: "error",
+          status: 'error',
           error: error.response.data,
         };
       }
     },
-  }))
+    setApiTahunan: async ({tahun}) => {
+      try {
+        const res = await api({
+          method: 'get',
+          url: `/orang-hilang/tahunan`,
+          params: {
+            tahun,
+          },
+        });
+        set(state => ({...state, dtApiOrgHilang: res.data}));
+        return {
+          status: 'berhasil',
+          data: res.data,
+        };
+      } catch (error) {
+        return {
+          status: 'error',
+          error: error.response.data,
+        };
+      }
+    },
+  })),
 );
 
-export default useTransaksiAPI;
+export default useOrangHilangAPI;

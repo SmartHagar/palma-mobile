@@ -68,12 +68,17 @@ const DistrikSelect = ({pilihDistrik, isReset}) => {
         );
       }}
       dropdownIconPosition={'right'}
-      searchInputStyle={{height: 30, borderBottomColor: colors.third}}
+      searchInputStyle={{
+        height: 50,
+        borderBottomColor: colors.third,
+        borderBottomWidth: 1,
+      }}
       dropdownStyle={{
         backgroundColor: colors.putih,
         borderRadius: 6,
+        minHeight: 200,
       }}
-      rowStyle={{height: 30}}
+      rowStyle={{height: 40}}
       rowTextStyle={{fontSize: 14}}
       dropdownOverlayColor="rgba(0, 0, 0, 0.314)"
     />

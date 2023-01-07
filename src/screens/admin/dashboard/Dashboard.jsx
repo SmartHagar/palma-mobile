@@ -1,4 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
+import {useIsFocused} from '@react-navigation/native';
 import React from 'react';
 import GrafikOrangHilang from '../../../componets/grafik/tahunan/GrafikOrangHilang';
 

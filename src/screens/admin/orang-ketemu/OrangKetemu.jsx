@@ -8,6 +8,7 @@ import useOrangKetemu from '../../../store/crud/orang-ketemu';
 import AddLokasi from './AddLokasi';
 import BtnPrimary from '../../../componets/button/BtnPrimary';
 import MyDialog from './MyDialog';
+import {useIsFocused} from '@react-navigation/native';
 
 const OrangKetemu = () => {
   // store
@@ -19,6 +20,7 @@ const OrangKetemu = () => {
   const [visible, setVisible] = useState(false);
   const [id, setId] = useState(false);
   const [dtDet, setDtDet] = useState([]);
+  const isFocused = useIsFocused();
 
   // hapus data
   const handleHapus = row => {
@@ -33,9 +35,9 @@ const OrangKetemu = () => {
   // use effetct
   useEffect(() => {
     setOrangKetemu({});
-
+    setIsReset(true);
     return () => {};
-  }, []);
+  }, [isFocused]);
 
   // validation
   const {

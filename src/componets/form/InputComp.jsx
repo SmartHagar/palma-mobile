@@ -37,7 +37,11 @@ const InputComp = ({
             underlayColor="rgba(221, 221, 221, 0.14)"
             className="absolute top-1 right-1"
             onPress={() => setHidePassword(!hidePassword)}>
-            <Icon name={hidePassword ? 'eye-off' : 'eye'} size={20} />
+            <Icon
+              name={hidePassword ? 'eye-off' : 'eye'}
+              size={20}
+              color="rgb(76, 75, 75)"
+            />
           </TouchableHighlight>
         )}
       </View>

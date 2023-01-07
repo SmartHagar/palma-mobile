@@ -2,7 +2,8 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import MapboxGL, {MapView, Camera} from '@rnmapbox/maps';
 import colors from '../../../assets/styles/colors';
-import useOrangHilang from '../../../store/crud/orang-hilang';
+import useOrangHilangAPI from '../../../store/api/orang-hilang';
+import {useIsFocused} from '@react-navigation/native';
 
 MapboxGL.setWellKnownTileServer('Mapbox');
 MapboxGL.setAccessToken(
@@ -11,17 +12,17 @@ MapboxGL.setAccessToken(
 
 const Sebaran = () => {
   // store
-  const {setOrangHilang, dtOrangHilang} = useOrangHilang();
+  const {setApiOrangHilang, dtApiOrgHilang} = useOrangHilangAPI();
   const coordinates = [140.7038764782628, -2.542737536781644];
-
+  const isFocused = useIsFocused();
   // effect
   useEffect(() => {
-    setOrangHilang({});
+    setApiOrangHilang({});
     return () => {};
-  }, []);
+  }, [isFocused]);
 
   const showPoint = () => {
-    return dtOrangHilang.map((row, index) => {
+    return dtApiOrgHilang.map((row, index) => {
       const {lokasi} = row;
       if (lokasi !== null) {
         const coorMiss = [lokasi.longitude, lokasi.latitude];

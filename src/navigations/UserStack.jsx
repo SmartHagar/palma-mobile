@@ -6,6 +6,8 @@ import UserTap from './UserTap';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Register from '../screens/users/register/Register';
 
+import {appName} from '../services/my-variable';
+
 const Stack = createNativeStackNavigator();
 
 const UserStack = () => {

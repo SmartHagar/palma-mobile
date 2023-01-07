@@ -13,6 +13,8 @@ import useOrangHilang from '../../../store/crud/orang-hilang';
 import useLogin from '../../../store/auth/login';
 import DialogComp from '../../../componets/form/DialogComp';
 import {useNavigation} from '@react-navigation/native';
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 const FormOrangHilang = ({
   openForm,
@@ -24,6 +26,8 @@ const FormOrangHilang = ({
   const [imgOrg, setImgOrng] = useState(null);
   const [berhasil, setBerhasil] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showDatePick, setShowDatePick] = useState(false);
+  const [date, setDate] = useState(new Date());
   // store
   const {addData} = useOrangHilang();
   const {setFromStorage, dtLogin} = useLogin();
@@ -35,6 +39,13 @@ const FormOrangHilang = ({
 
     return () => {};
   }, []);
+
+  // date ficker
+  const changeDate = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShowDatePick(false);
+    setDate(currentDate);
+  };
 
   // validation
   const {
@@ -56,6 +67,7 @@ const FormOrangHilang = ({
       },
     );
     setImgOrng('');
+    setDate(new Date());
   };
 
   const options = {
@@ -76,6 +88,7 @@ const FormOrangHilang = ({
     // validasi foto
     data.foto = imgOrg?.assets[0];
     data.pelapor_id = dtLogin?.pelapor.id;
+    data.tgl_hilang = moment(date).format('YYYY-MM-DD');
     // retur
     // simpan data
     setIsLoading(true);
@@ -416,6 +429,27 @@ const FormOrangHilang = ({
             )}
             name="alamat"
           />
+        </View>
+        {/* alamat */}
+        <View className="mt-2">
+          <Text className="text-black font-[Roboto-Regular] mb-1">
+            Tanggal Kejadian
+          </Text>
+          <View>
+            <Text
+              style={{borderColor: colors.third}}
+              className={`border text-black py-[8px] px-2 rounded-md font-[Roboto-Regular]`}
+              onPress={() => setShowDatePick(true)}>
+              {moment(date).format('DD MMMM YYYY')}
+            </Text>
+            {showDatePick && (
+              <RNDateTimePicker
+                value={new Date(date)}
+                onChange={changeDate}
+                locale="id-ID"
+              />
+            )}
+          </View>
         </View>
 
         {berhasil ? (

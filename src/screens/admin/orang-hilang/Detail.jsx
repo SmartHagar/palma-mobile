@@ -62,6 +62,17 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             }}
           />
         </View>
+        {/* tgl_hilang */}
+        <View
+          className="border p-1 rounded-md"
+          style={{borderColor: colors.third}}>
+          <Text className="text-black font-[Roboto-Regular] text-center underline">
+            Tgl. Kejadian
+          </Text>
+          <Text className="text-black font-[Roboto-Regular]">
+            {moment(dtDet.tgl_hilang).format('DD MMMM YYYY')}
+          </Text>
+        </View>
         {/* NO KTP */}
         <View
           className="border p-1 rounded-md"

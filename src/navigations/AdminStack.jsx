@@ -1,4 +1,4 @@
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Dashboard from '../screens/admin/dashboard/Dashboard';
@@ -8,184 +8,153 @@ import Pelapor from '../screens/admin/pelapor/Pelapor';
 import OrangHilang from '../screens/admin/orang-hilang/OrangHilang';
 import Laporan from '../screens/admin/laporan/Laporan';
 import OrangKetemu from '../screens/admin/orang-ketemu/OrangKetemu';
-import {Button} from '@rneui/base';
 import DrawToogle from './DrawToogle';
 import colors from '../assets/styles/colors';
 import Akun from '../screens/admin/akun/Akun';
 const Stack = createNativeStackNavigator();
 
+import {appName} from '../services/my-variable';
+
+const Judul = () => (
+  <View className="flex-1">
+    <Text className="text-white text-lg font-[Montserrat-Bold] text-center mr-5">
+      {appName}
+    </Text>
+  </View>
+);
+
 const DashboardStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="DashboardStack"
-        options={{
-          title: 'Dashboard',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-        component={Dashboard}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="DashboardStack" component={Dashboard} />
     </Stack.Navigator>
   );
 };
 
 const SebaranStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="SebaranStack"
-        component={Sebaran}
-        options={{
-          title: 'Sebaran',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="SebaranStack" component={Sebaran} />
     </Stack.Navigator>
   );
 };
 
 const DistrikStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="DistrikStack"
-        component={Distrik}
-        options={{
-          title: 'Distrik',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="DistrikStack" component={Distrik} />
     </Stack.Navigator>
   );
 };
 
 const PelaporStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="PelaporStack"
-        component={Pelapor}
-        options={{
-          title: 'Pelapor',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="PelaporStack" component={Pelapor} />
     </Stack.Navigator>
   );
 };
 
 const OrangHilangStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="OrangHilangStack"
-        component={OrangHilang}
-        options={{
-          title: 'Orang Hilang',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="OrangHilangStack" component={OrangHilang} />
     </Stack.Navigator>
   );
 };
 
 const LaporanStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="LaporanStack"
-        component={Laporan}
-        options={{
-          title: 'Laporan',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="LaporanStack" component={Laporan} />
     </Stack.Navigator>
   );
 };
 
 const OrangKetemuStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="OrangKetemuStack"
-        component={OrangKetemu}
-        options={{
-          title: 'Orang Ketemu',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="OrangKetemuStack" component={OrangKetemu} />
     </Stack.Navigator>
   );
 };
 
 const AkunStack = ({navigation}) => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="AkunStack"
-        component={Akun}
-        options={{
-          title: 'Akun',
-          headerStyle: styles.headerStyle,
-          headerTintColor: colors.putih,
-          headerTitleStyle: styles.headerTitleStyle,
-          headerLeft: () => (
-            <View style={styles.btn}>
-              <DrawToogle navigation={navigation} />
-            </View>
-          ),
-        }}
-      />
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="AkunStack" component={Akun} />
     </Stack.Navigator>
   );
 };
