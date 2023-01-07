@@ -70,7 +70,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             No. KTP
           </Text>
           <Text className="text-black font-[Roboto-Regular]">
-            {dtDet.no_ktp}
+            {dtDet.no_ktp === 'undefined' ? '-' : dtDet.no_ktp}
           </Text>
         </View>
 
@@ -82,7 +82,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             No. KK
           </Text>
           <Text className="text-black font-[Roboto-Regular]">
-            {dtDet.no_kk}
+            {dtDet.no_kk === 'undefined' ? '-' : dtDet.no_kk}
           </Text>
         </View>
         {/* No HP */}
@@ -93,7 +93,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             No. HP
           </Text>
           <Text className="text-black font-[Roboto-Regular]">
-            {dtDet.no_hp}
+            {dtDet.no_hp === 'undefined' ? '-' : dtDet.no_hp}
           </Text>
         </View>
         {/* suku */}
@@ -211,22 +211,6 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
         </View>
       </ScrollView>
       <View>
-        <StatusSelect
-          isReset={isReset}
-          setPilihStatus={setPilihStatus}
-          defaultButtonText={
-            dtDet ? myCapitalize(dtDet.status) : 'Pilih Status'
-          }
-        />
-      </View>
-      <View className="space-y-2 mt-4">
-        {isLoading ? (
-          <SpinerLoad />
-        ) : (
-          <View>
-            <BtnPrimary onPress={onSubmit} text="Ubah Status" />
-          </View>
-        )}
         <View className="w-[80%] mx-auto">
           <BtnPrimary
             onPress={() => setVisible(false)}

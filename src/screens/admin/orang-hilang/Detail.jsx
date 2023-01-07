@@ -81,7 +81,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             No. KTP
           </Text>
           <Text className="text-black font-[Roboto-Regular]">
-            {dtDet.no_ktp}
+            {dtDet.no_ktp === 'undefined' ? '-' : dtDet.no_ktp}
           </Text>
         </View>
 
@@ -93,7 +93,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             No. KK
           </Text>
           <Text className="text-black font-[Roboto-Regular]">
-            {dtDet.no_kk}
+            {dtDet.no_kk === 'undefined' ? '-' : dtDet.no_kk}
           </Text>
         </View>
         {/* No HP */}
@@ -104,7 +104,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
             No. HP
           </Text>
           <Text className="text-black font-[Roboto-Regular]">
-            {dtDet.no_hp}
+            {dtDet.no_hp === 'undefined' ? '-' : dtDet.no_hp}
           </Text>
         </View>
         {/* suku */}
