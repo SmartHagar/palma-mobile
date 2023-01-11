@@ -40,9 +40,6 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
     setIsLoading(true);
     const ubah = await ubahStatus(dtDet.id, items);
     setIsLoading(false);
-    if (pilihStatus === 'diterima') {
-      navigation.navigate('LaporanStack');
-    }
     setVisible(false);
     setRefreshing(true);
   };
@@ -232,6 +229,7 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
         <StatusSelect
           isReset={isReset}
           setPilihStatus={setPilihStatus}
+          hilang={true}
           defaultButtonText={
             dtDet ? myCapitalize(dtDet.status) : 'Pilih Status'
           }

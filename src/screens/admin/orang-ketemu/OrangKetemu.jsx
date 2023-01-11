@@ -90,6 +90,7 @@ const OrangKetemu = () => {
             <OrangHilangSelect
               setPilihOrangHilang={setPilihOrangHilang}
               isReset={isReset}
+              defaultButtonText={`Pilih Orang Hilang`}
             />
             {!pilihOrangHilang && (
               <Text className="text-red-700">Tidak boleh kosong</Text>

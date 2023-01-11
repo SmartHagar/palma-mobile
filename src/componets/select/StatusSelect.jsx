@@ -18,9 +18,13 @@ const dtStatus = [
     label: 'Ditolak',
     value: 'ditolak',
   },
+  {
+    label: 'Dihentikan',
+    value: 'dihentikan',
+  },
 ];
 
-const StatusSelect = ({isReset, setPilihStatus, ...props}) => {
+const StatusSelect = ({isReset, setPilihStatus, hilang = false, ...props}) => {
   // store
   const dropdownRef = useRef({});
 
@@ -30,10 +34,19 @@ const StatusSelect = ({isReset, setPilihStatus, ...props}) => {
 
   // pilihan Status
   const optionsStatus = dtStatus.map(function (status) {
-    return {
-      value: status.value,
-      label: `${status.label}`,
-    };
+    if (!hilang) {
+      if (status.value !== 'dihentikan') {
+        return {
+          value: status.value,
+          label: `${status.label}`,
+        };
+      }
+    } else {
+      return {
+        value: status.value,
+        label: `${status.label}`,
+      };
+    }
   });
 
   return (

@@ -9,16 +9,16 @@ const {api} = useUrl();
 
 // const getToken = JSON.parse(localStorage.getItem("token"));
 
-const useLaporanAPI = create(
+const usePerkembanganAPI = create(
   devtools((set, get) => ({
-    dtApiLaporan: [],
-    setApiLaporan: async () => {
+    dtPerkembangan: [],
+    setApiPerkembangan: async () => {
       try {
         const res = await api({
           method: 'get',
-          url: `/laporan`,
+          url: `/perkembangan`,
         });
-        set(state => ({...state, dtApiLaporan: res.data}));
+        set(state => ({...state, dtPerkembangan: res.data}));
         return {
           status: 'berhasil',
           data: res.data,
@@ -33,4 +33,4 @@ const useLaporanAPI = create(
   })),
 );
 
-export default useLaporanAPI;
+export default usePerkembanganAPI;

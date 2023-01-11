@@ -9,7 +9,7 @@ import {
 import React, {useState} from 'react';
 import colors from '../../../assets/styles/colors';
 import Detail from './Detail';
-import ShowLokasi from './ShowLokasi';
+import moment from 'moment';
 
 const ListData = ({
   dataList,
@@ -24,54 +24,35 @@ const ListData = ({
   // state
   const [visible, setVisible] = useState(false);
   const [dtDet, setDtDet] = useState(false);
-  const [openLokasi, setOpenLokasi] = useState(false);
   // show data detail
   const showDetail = data => {
     setVisible(true);
-    setDtDet(data);
-  };
-  // show lokasi
-  const showLokasi = data => {
-    setOpenLokasi(true);
     setDtDet(data);
   };
   // render Item
   const renderItem = ({item, index}) => (
     <View
       style={{
-        backgroundColor:
-          item.status === 'ditolak'
-            ? colors.danger
-            : item.status === 'diproses'
-            ? colors.primary
-            : item.status === 'dihentikan'
-            ? colors.active
-            : item.status === 'diterima'
-            ? 'rgba(254, 254, 254, 0.649)'
-            : '',
-
         borderWidth: 1,
         borderColor: colors.third,
       }}
-      className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white">
-      <TouchableOpacity onPress={() => showDetail(item)}>
-        <Text className="text-black">{item.nama}</Text>
-      </TouchableOpacity>
+      className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white/50">
+      <View className="w-[90%]">
+        <TouchableOpacity onPress={() => showDetail(item)}>
+          <Text className="text-black">{item.laporan.orang_hilang.nama}</Text>
+          <View className="flex-row space-x-1">
+            <Text className="text-black">
+              {moment(item.tgl).format('DD MMMM YYYY')}
+            </Text>
+          </View>
+        </TouchableOpacity>
+      </View>
 
       <View className="flex-row items-center space-x-[2px]">
-        {item.lokasi !== null && (
-          <TouchableOpacity
-            onPress={() => showLokasi(item)}
-            style={{backgroundColor: colors.third}}
-            className="p-1 rounded-md">
-            <Text className="text-white">Lokasi</Text>
-          </TouchableOpacity>
-        )}
-
         <TouchableOpacity
-          onPress={() => handleHapus(item.id)}
-          className="p-1 rounded-md bg-red-500">
-          <Text className="text-white">Hapus</Text>
+          onPress={() => handleEdit(item)}
+          className="p-1 rounded-md bg-yellow-200">
+          <Text className="text-black">Ubah</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -114,13 +95,6 @@ const ListData = ({
           setVisible={setVisible}
           dtDet={dtDet}
           setRefreshing={setRefreshing}
-        />
-      )}
-      {openLokasi && (
-        <ShowLokasi
-          openLokasi={openLokasi}
-          setOpenLokasi={setOpenLokasi}
-          dtDet={dtDet}
         />
       )}
       <FlatList

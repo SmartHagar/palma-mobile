@@ -5,7 +5,7 @@ import {Icon} from '@rneui/themed';
 import colors from '../../assets/styles/colors';
 import useOrangHilang from '../../store/crud/orang-hilang';
 
-const OrangHilangSelect = ({setPilihOrangHilang, isReset}) => {
+const OrangHilangSelect = ({setPilihOrangHilang, isReset, ...props}) => {
   // store
   const {setOrangHilang, dtOrangHilang} = useOrangHilang();
   const dropdownRef = useRef({});
@@ -18,10 +18,12 @@ const OrangHilangSelect = ({setPilihOrangHilang, isReset}) => {
 
   // pilihan org
   const optionsOrg = dtOrangHilang.map(function (org) {
-    return {
-      value: org.id,
-      label: `${org.nama}`,
-    };
+    if (org.status === 'diterima') {
+      return {
+        value: org.id,
+        label: `${org.nama}`,
+      };
+    }
   });
 
   const onSearchSelect = search => {
@@ -44,7 +46,6 @@ const OrangHilangSelect = ({setPilihOrangHilang, isReset}) => {
       rowTextForSelection={(item, index) => {
         return item.label;
       }}
-      defaultButtonText="Pilih Orang Hilang"
       buttonStyle={{
         backgroundColor: colors.putih,
         borderColor: colors.third,
@@ -78,6 +79,7 @@ const OrangHilangSelect = ({setPilihOrangHilang, isReset}) => {
       rowStyle={{height: 40}}
       rowTextStyle={{fontSize: 14}}
       dropdownOverlayColor="rgba(0, 0, 0, 0.314)"
+      {...props}
     />
   );
 };
