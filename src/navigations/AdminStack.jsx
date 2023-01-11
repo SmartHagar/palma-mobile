@@ -14,6 +14,7 @@ import Akun from '../screens/admin/akun/Akun';
 const Stack = createNativeStackNavigator();
 
 import {appName} from '../services/my-variable';
+import Perkembangan from '../screens/admin/perkembangan/Perkembangan';
 
 const Judul = () => (
   <View className="flex-1">
@@ -158,6 +159,22 @@ const AkunStack = ({navigation}) => {
     </Stack.Navigator>
   );
 };
+const PerkembanganStack = ({navigation}) => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerLeft: () => (
+          <View style={styles.btn}>
+            <DrawToogle navigation={navigation} />
+          </View>
+        ),
+        headerStyle: styles.headerStyle,
+        headerTitle: () => <Judul />,
+      }}>
+      <Stack.Screen name="PerkembanganStack" component={Perkembangan} />
+    </Stack.Navigator>
+  );
+};
 
 export {
   DashboardStack,
@@ -168,6 +185,7 @@ export {
   LaporanStack,
   OrangKetemuStack,
   AkunStack,
+  PerkembanganStack,
 };
 
 const styles = StyleSheet.create({

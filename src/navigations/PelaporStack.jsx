@@ -5,6 +5,7 @@ import DaftarOrangHilang from '../screens/users/daftar/OrangHilang';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import PelaporTap from './PelaporTap';
 import OrangHilang from '../screens/pelapor/orang-hilang/OrangHilang';
+import Perkembangan from '../screens/pelapor/perkembangan/Perkembangan';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +38,16 @@ const PelaporStack = () => {
           headerTitleStyle: styles.headerTitleStyle,
         }}
         component={OrangHilang}
+      />
+      <Stack.Screen
+        name="PerkembanganStack"
+        options={{
+          title: 'Perkembangan Pencarian',
+          headerStyle: styles.headerStyle,
+          headerTintColor: colors.putih,
+          headerTitleStyle: styles.headerTitleStyle,
+        }}
+        component={Perkembangan}
       />
     </Stack.Navigator>
   );

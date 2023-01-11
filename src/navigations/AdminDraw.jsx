@@ -9,6 +9,7 @@ import {
   OrangHilangStack,
   OrangKetemuStack,
   PelaporStack,
+  PerkembanganStack,
 } from './AdminStack';
 import colors from '../assets/styles/colors';
 
@@ -59,14 +60,24 @@ const AdminDraw = () => {
         }}
         component={OrangHilangStack}
       />
-      {/* <Drawer.Screen
+      <Drawer.Screen
         name="LaporanDraw"
         options={{
           headerShown: false,
           title: 'Laporan',
         }}
         component={LaporanStack}
-      /> */}
+      />
+
+      <Drawer.Screen
+        name="PerkembanganDraw"
+        options={{
+          headerShown: false,
+          title: 'Perkembangan',
+        }}
+        component={PerkembanganStack}
+      />
+
       <Drawer.Screen
         name="OrangKetemuDraw"
         options={{
@@ -75,6 +86,7 @@ const AdminDraw = () => {
         }}
         component={OrangKetemuStack}
       />
+
       <Drawer.Screen
         name="Akun"
         options={{

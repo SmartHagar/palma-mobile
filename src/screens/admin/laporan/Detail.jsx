@@ -31,23 +31,8 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
     };
   }, [dtDet]);
 
-  const onSubmit = async () => {
-    const items = {
-      status: pilihStatus,
-      tgl_laporan: moment(new Date()).format('YYYY-MM-DD'),
-    };
-
-    setIsLoading(true);
-    const ubah = await ubahStatus(dtDet.id, items);
-    setIsLoading(false);
-    if (pilihStatus === 'diterima') {
-      navigation.navigate('LaporanStack');
-    }
-    setVisible(false);
-    setRefreshing(true);
-  };
   return (
-    <DialogComp openForm={visible} judul={dtDet.nama} height="90%">
+    <DialogComp openForm={visible} judul={dtDet.orang_hilang.nama} height="90%">
       <ScrollView
         className="mb-2 space-y-1"
         style={{borderColor: colors.third}}>
@@ -211,40 +196,18 @@ const Detail = ({visible, setVisible, dtDet, setRefreshing}) => {
           <View className="flex-row space-x-2">
             <Text className="text-black font-[Roboto-Regular] w-14">Nama</Text>
             <Text className="text-black font-[Roboto-Regular]">
-              : {dtDet.pelapor.nama}
+              : {dtDet.orang_hilang.pelapor.nama}
             </Text>
           </View>
           <View className="flex-row space-x-2">
             <Text className="text-black font-[Roboto-Regular] w-14">No Hp</Text>
             <Text className="text-black font-[Roboto-Regular]">
-              : {dtDet.pelapor.no_hp}
-            </Text>
-          </View>
-          <View className="flex-row space-x-2">
-            <Text className="text-black font-[Roboto-Regular] w-14">Email</Text>
-            <Text className="text-black font-[Roboto-Regular]">
-              : {dtDet.pelapor.user.email}
+              : {dtDet.orang_hilang.pelapor.no_hp}
             </Text>
           </View>
         </View>
       </ScrollView>
-      <View>
-        <StatusSelect
-          isReset={isReset}
-          setPilihStatus={setPilihStatus}
-          defaultButtonText={
-            dtDet ? myCapitalize(dtDet.status) : 'Pilih Status'
-          }
-        />
-      </View>
       <View className="space-y-2 mt-4">
-        {isLoading ? (
-          <SpinerLoad />
-        ) : (
-          <View>
-            <BtnPrimary onPress={onSubmit} text="Ubah Status" />
-          </View>
-        )}
         <View className="w-[80%] mx-auto">
           <BtnPrimary
             onPress={() => setVisible(false)}

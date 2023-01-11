@@ -32,7 +32,6 @@ const Akun = () => {
             {dtLogin.email}
           </Text>
         </View>
-        {console.log(dtLogin)}
         <BtnPrimary text="Logout" onPress={handleLogout} />
       </View>
     </View>

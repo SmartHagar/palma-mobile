@@ -16,10 +16,12 @@ import aturan from './aturan';
 import {useNavigation} from '@react-navigation/native';
 import useLogin from '../../../store/auth/login';
 import GrafikOrangHilangTahunan from '../../../componets/grafik/tahunan/GrafikOrangHilang';
+import useOrangHilang from '../../../store/crud/orang-hilang';
 
 const DashboardUser = () => {
   // store
   const {dtLogin, setFromStorage} = useLogin();
+  const {showOrangHilang, dtOrangHilang} = useOrangHilang();
   // navigation
   const navigation = useNavigation();
   // use effect
@@ -29,9 +31,18 @@ const DashboardUser = () => {
     return () => {};
   }, []);
 
+  // cek pelapor
+  useEffect(() => {
+    if (dtLogin.pelapor) {
+      showOrangHilang({id: dtLogin.pelapor.id});
+    }
+    return () => {};
+  }, [dtLogin]);
+
   return (
     <SafeAreaView style={styles.container} className="bg-white/50">
       {/* kop / logo */}
+      {/* {console.log(dtLogin.pelapor.id)} */}
       <View className="flex-row justify-start items-center space-x-4 mt-2 ml-1">
         <View>
           <Image
@@ -93,6 +104,22 @@ const DashboardUser = () => {
             ''
           )}
         </View>
+        {/* jika pernah melapor */}
+        {dtLogin?.role === 'pelapor' &&
+          dtOrangHilang &&
+          dtOrangHilang.length > 0 && (
+            <View className="w-40 mx-auto mt-2">
+              <TouchableOpacity
+                onPress={() => navigation.navigate('PerkembanganStack')}
+                className="rounded-lg"
+                style={{backgroundColor: colors.secondary}}>
+                <Text className="text-white font-[Roboto-Regular] p-2">
+                  Perkembangan Pencarian
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+
         {/* Grafik */}
         <View className="my-5">
           <View className="mb-1">
