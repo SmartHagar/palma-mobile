@@ -13,7 +13,8 @@ import BtnPrimary from '../../../componets/button/BtnPrimary';
 
 const Perkembangan = () => {
   // store
-  const {setPerkembangan, dtPerkembangan, responses} = usePerkembangan();
+  const {setPerkembangan, dtPerkembangan, responses, removeData} =
+    usePerkembangan();
   // state
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);

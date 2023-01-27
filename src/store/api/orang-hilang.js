@@ -30,6 +30,24 @@ const useOrangHilangAPI = create(
         };
       }
     },
+    setApiOrangHilangAll: async () => {
+      try {
+        const res = await api({
+          method: 'get',
+          url: `/orang-hilang/all`,
+        });
+        set(state => ({...state, dtApiOrgHilang: res.data}));
+        return {
+          status: 'berhasil',
+          data: res.data,
+        };
+      } catch (error) {
+        return {
+          status: 'error',
+          error: error.response.data,
+        };
+      }
+    },
     setApiTahunan: async ({tahun}) => {
       try {
         const res = await api({

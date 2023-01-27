@@ -37,7 +37,7 @@ const ListData = ({
         borderColor: colors.third,
       }}
       className="flex-row justify-between items-center h-9 my-[1px] px-1 rounded-lg bg-white/50">
-      <View className="w-[90%]">
+      <View className="w-[70%]">
         <TouchableOpacity onPress={() => showDetail(item)}>
           <Text className="text-black">{item.laporan.orang_hilang.nama}</Text>
           <View className="flex-row space-x-1">
@@ -48,7 +48,15 @@ const ListData = ({
         </TouchableOpacity>
       </View>
 
-      <View className="flex-row items-center space-x-[2px]">
+      <View className="flex-row items-center">
+        <TouchableOpacity
+          onPress={() => handleHapus(item.id)}
+          className="p-1 rounded-md bg-red-500">
+          <Text className="text-white">Hapus</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View className="flex-row items-center">
         <TouchableOpacity
           onPress={() => handleEdit(item)}
           className="p-1 rounded-md bg-yellow-200">
