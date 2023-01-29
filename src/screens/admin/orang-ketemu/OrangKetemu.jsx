@@ -30,13 +30,17 @@ const OrangKetemu = () => {
   };
   // perintah delete dijalankan
   const deleteData = async () => {
+    setIsReset(true);
     const res = await removeData(id);
+    setIsReset(false);
   };
   // use effetct
   useEffect(() => {
     setOrangKetemu({});
     setIsReset(true);
-    return () => {};
+    return () => {
+      setIsReset(false);
+    };
   }, [isFocused]);
 
   // validation
@@ -50,7 +54,8 @@ const OrangKetemu = () => {
   const resetInput = () => {
     reset(
       {
-        nama: '',
+        nm_penemu: '',
+        alamat_ketemu: '',
       },
       {
         keepErrors: true,
@@ -60,14 +65,17 @@ const OrangKetemu = () => {
   };
   // ketika data akan disimpan
   const onSubmit = async data => {
+    setIsReset(false);
     if (!getCoord) {
       return 0;
     }
+    console.log(data);
     data.orang_hilang_id = pilihOrangHilang;
     data.longitude = getCoord[0];
     data.latitude = getCoord[1];
     // simpan data
     const add = await addData(data);
+    console.log(add);
     if (add.data.type === 'success') {
       resetInput();
       setIsReset(true);

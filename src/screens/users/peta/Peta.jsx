@@ -32,15 +32,32 @@ const Peta = () => {
         const ketemu = row?.orang_ketemu;
         return (
           <View key={index}>
-            <MapboxGL.PointAnnotation
-              coordinate={coorMiss}
-              id={(index + 1).toString()}>
-              <View
-                style={{backgroundColor: ketemu ? colors.danger : 'blue'}}
-                className="rounded-full">
-                <Text className="text-white p-1">{row.nama}</Text>
-              </View>
-            </MapboxGL.PointAnnotation>
+            {ketemu && (
+              <MapboxGL.PointAnnotation
+                coordinate={coorMiss}
+                id={(index + 1).toString()}>
+                <View
+                  style={{
+                    backgroundColor: colors.danger,
+                  }}
+                  className="rounded-full">
+                  <Text className="text-white p-1">{row.nama}</Text>
+                </View>
+              </MapboxGL.PointAnnotation>
+            )}
+            {!ketemu && (
+              <MapboxGL.PointAnnotation
+                coordinate={coorMiss}
+                id={(index + 1).toString()}>
+                <View
+                  style={{
+                    backgroundColor: 'blue',
+                  }}
+                  className="rounded-full">
+                  <Text className="text-white p-1">{row.nama}</Text>
+                </View>
+              </MapboxGL.PointAnnotation>
+            )}
           </View>
         );
       }
@@ -56,7 +73,7 @@ const Peta = () => {
         {/* koordinate */}
         <MapboxGL.Camera zoomLevel={15} centerCoordinate={coordinates} />
         {/* Mark */}
-        {mapReady && <>{showPoint()}</>}
+        {mapReady && showPoint()}
       </MapboxGL.MapView>
     </View>
   );

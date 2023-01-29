@@ -31,18 +31,32 @@ const Sebaran = () => {
         const ketemu = row?.orang_ketemu;
         return (
           <View key={index}>
-            {console.log('prang ketemu', ketemu)}
-            <MapboxGL.PointAnnotation
-              coordinate={coorMiss}
-              id={(index + 1).toString()}>
-              <View
-                style={{
-                  backgroundColor: ketemu ? colors.danger : 'blue',
-                }}
-                className="rounded-full">
-                <Text className="text-white p-1">{row.nama}</Text>
-              </View>
-            </MapboxGL.PointAnnotation>
+            {ketemu && (
+              <MapboxGL.PointAnnotation
+                coordinate={coorMiss}
+                id={(index + 1).toString()}>
+                <View
+                  style={{
+                    backgroundColor: colors.danger,
+                  }}
+                  className="rounded-full">
+                  <Text className="text-white p-1">{row.nama}</Text>
+                </View>
+              </MapboxGL.PointAnnotation>
+            )}
+            {!ketemu && (
+              <MapboxGL.PointAnnotation
+                coordinate={coorMiss}
+                id={(index + 1).toString()}>
+                <View
+                  style={{
+                    backgroundColor: 'blue',
+                  }}
+                  className="rounded-full">
+                  <Text className="text-white p-1">{row.nama}</Text>
+                </View>
+              </MapboxGL.PointAnnotation>
+            )}
           </View>
         );
       }
